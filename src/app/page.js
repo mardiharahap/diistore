@@ -124,7 +124,7 @@ export default function Page() {
       <div className="w-full max-w-4xl p-4 md:p-6 rounded-3xl shadow-2xl bg-gradient-to-br from-gray-800 via-gray-700 to-gray-900 backdrop-blur-md transition-all duration-500">
         <div className="flex items-center justify-center mb-6 space-x-4">
   <Image
-    src="/logo.png"
+    src="/logo.jpg"
     alt="DIISTORE Logo"
     width={60}   // ukuran logo, bisa disesuaikan
     height={60}
