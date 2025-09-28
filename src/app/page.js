@@ -224,7 +224,7 @@ export default function Page() {
                       Rp {(Number(p.harga_final) + 3000).toLocaleString("id-ID")}
                     </p>
                     <button
-                      onClick={() => setSelectedProduct(p)}
+                      onClick={() => setSelectedProduct({ ...p, isOther: false })}
                       className="mt-2 px-4 py-2 bg-blue-500 rounded-lg text-white font-bold hover:bg-blue-600 transition-colors"
                     >
                       Beli
@@ -254,7 +254,7 @@ export default function Page() {
                     Rp {Number(p.harga_final).toLocaleString("id-ID")}
                   </p>
                   <button
-                    onClick={() => setSelectedProduct(p)}
+                    onClick={() => setSelectedProduct({ ...p, isOther: true })}
                     className="mt-2 px-4 py-2 bg-blue-500 rounded-lg text-white font-bold hover:bg-blue-600 transition-colors"
                   >
                     Beli
@@ -305,15 +305,24 @@ export default function Page() {
       {/* Modal Popup */}
       {selectedProduct && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-          <div className="bg-gray-800 p-6 rounded-3xl shadow-2xl max-w-sm w-full max-h-[90vh] overflow-y-auto relative">
-            <h2 className="text-white text-xl font-bold mb-4">{selectedProduct.nama_produk}</h2>
-            <p className="text-gray-300 mb-4">{selectedProduct.deskripsi}</p>
+          <div className="bg-gray-800 p-6 rounded-3xl shadow-2xl max-w-sm w-full max-h-[90vh] overflow-y-auto relative transform scale-90 opacity-0 animate-scaleFade">
+            <h2 className="text-white text-xl font-bold mb-2">{selectedProduct.nama_produk}</h2>
+            <p className="text-gray-300 mb-2">{selectedProduct.deskripsi}</p>
+
             <p className="text-green-400 font-bold text-lg mb-4">
-              Rp {selectedProduct.harga_final
-                ? (Number(selectedProduct.harga_final) + 3000 + randomPerak()).toLocaleString("id-ID")
-                : (Number(selectedProduct.harga_final) + randomPerak()).toLocaleString("id-ID")}
+              Rp{" "}
+              {selectedProduct.isOther
+                ? Number(selectedProduct.harga_final).toLocaleString("id-ID")
+                : (Number(selectedProduct.harga_final) + 3000 + randomPerak()).toLocaleString("id-ID")}
             </p>
-            <div className="flex flex-col items-center gap-3">
+
+            <p className="text-yellow-300 text-sm mb-4">
+              Silahkan transfer sesuai harga tertera, agar admin tahu Anda yang TF.
+              Setelah TF, hubungi WA admin. <br />
+              ⚠️ Semua bekasan diisi jam 06.00 pagi
+            </p>
+
+            <div className="flex flex-col items-center gap-3 mb-4">
               <Image
                 src="/qr.png"
                 alt="QRIS Pembayaran"
@@ -337,6 +346,7 @@ export default function Page() {
                 💬 Hubungi Admin
               </a>
             </div>
+
             <button
               onClick={() => setSelectedProduct(null)}
               className="absolute top-3 right-3 text-white text-xl font-bold hover:text-red-500"
@@ -346,6 +356,23 @@ export default function Page() {
           </div>
         </div>
       )}
+
+      {/* Animasi scale + fade */}
+      <style jsx>{`
+        @keyframes scaleFade {
+          0% {
+            transform: scale(0.9);
+            opacity: 0;
+          }
+          100% {
+            transform: scale(1);
+            opacity: 1;
+          }
+        }
+        .animate-scaleFade {
+          animation: scaleFade 0.25s ease-out forwards;
+        }
+      `}</style>
     </main>
   );
 }
