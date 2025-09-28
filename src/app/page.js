@@ -128,7 +128,7 @@ export default function Page() {
     alt="DIISTORE Logo"
     width={60}   // ukuran logo, bisa disesuaikan
     height={60}
-    className="rounded-lg"
+    className="rounded-full"
   />
   <h1 className="text-2xl md:text-3xl font-bold text-white drop-shadow-lg">
     DIISTORE Dashboard
