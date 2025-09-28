@@ -1,34 +1,84 @@
-import fs from "fs";
-import path from "path";
+// pages/api/webhook/route.js
+import { transactions } from '../_transactions';
 
-export default async function handler(req, res) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ ok: false, error: "Method not allowed" });
+export async function GET(req) {
+  const { searchParams } = new URL(req.url);
+  let message = searchParams.get('message');
+
+  if (!message) {
+    console.log('[WEBHOOK] message kosong (GET)');
+    return new Response(JSON.stringify({ ok: false, error: 'message kosong' }), { status: 400 });
   }
 
-  const data = req.body;
+  return handleMessage(message);
+}
 
-  if (!data.produk || !data.tujuan) {
-    return res.status(400).json({ ok: false, error: "message kosong" });
-  }
-
-  const filePath = path.join(process.cwd(), "pages/api/_transactions.json");
-  let transactions = [];
-
+export async function POST(req) {
+  let body;
   try {
-    transactions = JSON.parse(fs.readFileSync(filePath, "utf-8"));
-  } catch (err) {
-    transactions = [];
+    body = await req.json();
+  } catch {
+    body = {};
+  }
+  let message = body?.message || body;
+
+  if (!message) {
+    console.log('[WEBHOOK] message kosong (POST)');
+    return new Response(JSON.stringify({ ok: false, error: 'message kosong' }), { status: 400 });
   }
 
+  return handleMessage(message);
+}
+
+function handleMessage(message) {
+  const RX =
+    /RC=(?<reffid>[a-f0-9-]+)\s+TrxID=(?<trxid>\d+)\s+(?<produk>[A-Z0-9]+)\.(?<tujuan>\d+)\s+(?<status_text>[A-Za-z]+)\s*(?<keterangan>.+?)(?:\s+Saldo[\s\S]*?)?(?:\bresult=(?<status_code>\d+))?\s*>?$/i;
+
+  const match = message.match(RX);
+
+  if (!match || !match.groups) {
+    console.log('[WEBHOOK] format tidak dikenali ->', message);
+    return new Response(JSON.stringify({ ok: false, error: 'format tidak dikenali' }), { status: 200 });
+  }
+
+  const { trxid, reffid, produk, tujuan, status_text } = match.groups;
+  const keterangan = (match.groups.keterangan || '').trim();
+  const status_code = match.groups.status_code
+    ? Number(match.groups.status_code)
+    : /sukses/i.test(status_text)
+    ? 0
+    : /gagal|batal/i.test(status_text)
+    ? 1
+    : null;
+
+  console.log('==== CALLBACK MASUK ====');
+  console.log('RAW        :', message);
+  console.log('reffid     :', reffid);
+  console.log('trxid      :', trxid);
+  console.log('produk     :', produk);
+  console.log('tujuan     :', tujuan);
+  console.log('status_txt :', status_text);
+  console.log('status_code:', status_code);
+  console.log('keterangan :', keterangan);
+  console.log('=========================');
+
+  // Simpan di array global sementara
   transactions.push({
-    produk: data.produk,
-    tujuan: data.tujuan,
-    status_code: data.status_code ?? 1, // 0 = sukses, 1 = gagal
-    waktu: new Date().toISOString(),
+    trxid,
+    reffid,
+    produk,
+    tujuan,
+    status_text,
+    status_code,
+    keterangan,
+    timestamp: Date.now(),
   });
 
-  fs.writeFileSync(filePath, JSON.stringify(transactions, null, 2));
-
-  return res.status(200).json({ ok: true });
+  return new Response(
+    JSON.stringify({
+      ok: true,
+      parsed: { trxid, reffid, produk, tujuan, status_text, status_code, keterangan },
+    }),
+    { status: 200 }
+  );
 }
