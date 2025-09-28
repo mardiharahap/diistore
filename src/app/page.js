@@ -15,6 +15,11 @@ export default function Page() {
   const [loadingArea, setLoadingArea] = useState(false);
   const [searchArea, setSearchArea] = useState("");
 
+  // Modal state
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [isOther, setIsOther] = useState(false);
+
+  // Fetch API Products
   const fetchProducts = async () => {
     setLoadingProducts(true);
     try {
@@ -28,6 +33,7 @@ export default function Page() {
     }
   };
 
+  // Fetch Stock
   const fetchStock = async () => {
     setLoadingStock(true);
     try {
@@ -41,6 +47,7 @@ export default function Page() {
     }
   };
 
+  // Fetch Area Data
   const fetchAreaData = async () => {
     setLoadingArea(true);
     try {
@@ -77,6 +84,7 @@ export default function Page() {
     setOtherProductsState(otherProducts);
   }, []);
 
+  // Area filter
   useEffect(() => {
     if (!searchArea) {
       setFilteredArea(areaData);
@@ -92,18 +100,19 @@ export default function Page() {
     }
   }, [searchArea, areaData]);
 
+  // Stok color
   const getBgColor = (sisa) => {
     if (sisa === 0) return "bg-red-600/30";
     if (sisa < 50) return "bg-yellow-400/30";
     return "bg-green-500/30";
   };
-
   const getBadgeColor = (sisa) => {
     if (sisa === 0) return "bg-red-600";
     if (sisa < 50) return "bg-yellow-500";
     return "bg-green-600";
   };
 
+  // Highlight search
   const highlight = (text) => {
     if (!searchArea) return text;
     const regex = new RegExp(`(${searchArea})`, "gi");
@@ -122,46 +131,40 @@ export default function Page() {
   return (
     <main className="p-4 bg-gray-900 min-h-screen flex justify-center">
       <div className="w-full max-w-4xl p-4 md:p-6 rounded-3xl shadow-2xl bg-gradient-to-br from-gray-800 via-gray-700 to-gray-900 backdrop-blur-md transition-all duration-500">
+        
+        {/* Header */}
         <div className="flex items-center justify-center mb-6 space-x-4">
-  <div className="w-16 h-16 relative rounded-full overflow-hidden">
-  <Image
-    src="/logo.png"
-    alt="DIISTORE Logo"
-    fill
-    className="object-cover"
-  />
-</div>
-  <h1 className="text-2xl md:text-3xl font-bold text-white drop-shadow-lg">
-    DIISTORE Dashboard
-  </h1>
-</div>
+          <div className="w-16 h-16 relative rounded-full overflow-hidden">
+            <Image src="/logo.png" alt="DIISTORE Logo" fill className="object-cover"/>
+          </div>
+          <h1 className="text-2xl md:text-3xl font-bold text-white drop-shadow-lg">
+            DIISTORE Dashboard
+          </h1>
+        </div>
 
-       {/* Tabs */}
-<div className="sticky top-0 z-50 bg-gray-900 py-4 flex flex-wrap justify-center gap-3 shadow-md">
-  {[
-    { key: "stock", label: "📊 Cek Stok" },
-    { key: "products", label: "🛒 List Produk" },
-    { key: "area", label: "📍 Cek Area" },
-    { key: "other", label: "📝 Produk Lainnya" },
-    { key: "buy", label: "💳 Beli" },
-  ].map((tab) => (
-    <button
-      key={tab.key}
-      onClick={() => setActiveTab(tab.key)}
-      className={`px-6 py-2 rounded-full font-semibold transition-all ${
-        activeTab === tab.key
-          ? "bg-blue-500 text-white shadow-lg"
-          : "bg-gray-800 text-white border hover:shadow-md"
-      }`}
-    >
-      {tab.label}
-    </button>
-  ))}
-</div>
+        {/* Tabs */}
+        <div className="sticky top-0 z-50 bg-gray-900 py-4 flex flex-wrap justify-center gap-3 shadow-md">
+          {[
+            { key: "stock", label: "📊 Cek Stok" },
+            { key: "products", label: "🛒 List Produk" },
+            { key: "area", label: "📍 Cek Area" },
+            { key: "other", label: "📝 Produk Lainnya" },
+          ].map((tab) => (
+            <button
+              key={tab.key}
+              onClick={() => setActiveTab(tab.key)}
+              className={`px-6 py-2 rounded-full font-semibold transition-all ${
+                activeTab === tab.key
+                  ? "bg-blue-500 text-white shadow-lg"
+                  : "bg-gray-800 text-white border hover:shadow-md"
+              }`}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
 
-
-
-        {/* Stok */}
+        {/* Stock Tab */}
         {activeTab === "stock" && (
           <section className="flex flex-col items-center">
             <button
@@ -208,34 +211,48 @@ export default function Page() {
           </section>
         )}
 
-        {/* Produk */}
+        {/* Products Tab */}
         {activeTab === "products" && (
           <section>
             {loadingProducts ? (
               <p className="text-white">Loading produk...</p>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {products.map((p, i) => (
-                  <div
-                    key={i}
-                    className="p-4 border rounded-2xl shadow-lg hover:shadow-2xl transition-all bg-gradient-to-br from-gray-700 to-gray-800 text-white"
-                  >
-                    <h3 className="font-bold text-lg mb-1">
-                      {p.nama_produk} ({p.kode_produk})
-                    </h3>
-                    <p className="text-gray-300 text-sm mb-2">{p.kode_provider}</p>
-                    <p className="text-gray-200 mb-2 whitespace-pre-line">{p.deskripsi}</p>
-                    <p className="font-bold text-green-400">
-                      Rp {(Number(p.harga_final) + 3000).toLocaleString("id-ID")}
-                    </p>
-                  </div>
-                ))}
+                {products.map((p, i) => {
+                  const price = Number(p.harga_final) + 3000;
+                  return (
+                    <div
+                      key={i}
+                      className="p-4 border rounded-2xl shadow-lg hover:shadow-2xl transition-all bg-gradient-to-br from-gray-700 to-gray-800 text-white"
+                    >
+                      <h3 className="font-bold text-lg mb-1">
+                        {p.nama_produk} ({p.kode_produk})
+                      </h3>
+                      <p className="text-gray-300 text-sm mb-2">{p.kode_provider}</p>
+                      <p className="text-gray-200 mb-2 whitespace-pre-line">{p.deskripsi}</p>
+                      <p className="font-bold text-green-400">
+                        Rp {price.toLocaleString("id-ID")}
+                      </p>
+                      <button
+                        onClick={() => {
+                          const randomPerak = Math.floor(Math.random() * 100) + 1;
+                          const total = price + randomPerak;
+                          setSelectedProduct({ ...p, total, randomPerak });
+                          setIsOther(false);
+                        }}
+                        className="mt-2 px-4 py-2 bg-blue-500 rounded-xl text-white font-bold hover:bg-blue-600 transition-colors"
+                      >
+                        🛒 Beli
+                      </button>
+                    </div>
+                  );
+                })}
               </div>
             )}
           </section>
         )}
 
-        {/* Produk Lainnya */}
+        {/* Other Products Tab */}
         {activeTab === "other" && (
           <section>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -252,55 +269,24 @@ export default function Page() {
                   <p className="font-bold text-green-400">
                     Rp {Number(p.harga_final).toLocaleString("id-ID")}
                   </p>
+                  <button
+                    onClick={() => {
+                      const randomPerak = Math.floor(Math.random() * 100) + 1;
+                      const total = Number(p.harga_final) + randomPerak;
+                      setSelectedProduct({ ...p, total, randomPerak });
+                      setIsOther(true);
+                    }}
+                    className="mt-2 px-4 py-2 bg-blue-500 rounded-xl text-white font-bold hover:bg-blue-600 transition-colors"
+                  >
+                    🛒 Beli
+                  </button>
                 </div>
               ))}
             </div>
           </section>
         )}
 
-        {/* Beli */}
-        {activeTab === "buy" && (
-          <section className="flex flex-col items-center justify-center mt-6 space-y-4">
-            <p className="text-white text-center mb-2 text-lg font-semibold">
-              Silahkan transfer sesuai harga produk melalui QRIS berikut:
-            </p>
-
-            {/* QRIS Image */}
-            <div className="relative w-48 h-48 sm:w-64 sm:h-64">
-              <Image
-                src="/qr.png"
-                alt="QRIS Pembayaran"
-                fill
-                className="object-contain rounded-xl shadow-lg"
-              />
-            </div>
-
-            {/* Tombol Download QRIS */}
-            <a
-              href="/qr.png"
-              download="QRIS_DIISTORE.png"
-              className="px-6 py-3 bg-blue-500 rounded-xl text-white font-bold hover:bg-blue-600 transition-colors"
-            >
-              📥 Download QRIS
-            </a>
-
-            <p className="text-white text-center text-sm">
-              Setelah transfer, hubungi admin untuk konfirmasi pembayaran.
-            </p>
-
-            {/* Tombol Hubungi Admin */}
-            <a
-              href="https://wa.me/6283863622087"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-6 py-3 bg-green-500 rounded-xl text-white font-bold hover:bg-green-600 transition-colors"
-            >
-              💬 Hubungi Admin
-            </a>
-          </section>
-        )}
-
-        {/* Area */}
+        {/* Area Tab */}
         {activeTab === "area" && (
           <section>
             <input
@@ -335,6 +321,57 @@ export default function Page() {
             )}
           </section>
         )}
+
+        {/* Modal Popup */}
+        {selectedProduct && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+            <div className="bg-gray-800 p-6 rounded-3xl shadow-2xl max-w-sm w-full relative">
+              <button
+                onClick={() => setSelectedProduct(null)}
+                className="absolute top-3 right-3 text-white text-xl font-bold"
+              >
+                &times;
+              </button>
+              <h2 className="text-xl font-bold text-white mb-2">
+                {selectedProduct.nama_produk} ({selectedProduct.kode_produk})
+              </h2>
+              <p className="text-gray-300 mb-2">{selectedProduct.kode_provider}</p>
+              <p className="text-white font-semibold mb-4">
+                Transfer tepat: Rp {selectedProduct.total.toLocaleString("id-ID")}<br/>
+                (Tambahan {selectedProduct.randomPerak} perak)
+              </p>
+
+              {/* QRIS */}
+              <div className="relative w-48 h-48 mx-auto mb-4">
+                <Image src="/qr.png" alt="QRIS Pembayaran" fill className="object-contain rounded-xl shadow-lg" />
+              </div>
+
+              {/* Tombol Download QRIS */}
+              <a
+                href="/qr.png"
+                download={`QRIS_${selectedProduct.kode_produk}.png`}
+                className="block text-center mb-3 px-6 py-3 bg-blue-500 rounded-xl text-white font-bold hover:bg-blue-600 transition-colors"
+              >
+                📥 Download QRIS
+              </a>
+
+              {/* Hubungi Admin */}
+              <a
+                href="https://wa.me/6283863622087"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-center px-6 py-3 bg-green-500 rounded-xl text-white font-bold hover:bg-green-600 transition-colors"
+              >
+                💬 Hubungi Admin
+              </a>
+
+              <p className="text-gray-300 text-sm text-center mt-3">
+                Setelah transfer, silahkan konfirmasi ke admin.
+              </p>
+            </div>
+          </div>
+        )}
+
       </div>
     </main>
   );
