@@ -15,8 +15,6 @@ export default function Page() {
   const [loadingArea, setLoadingArea] = useState(false);
   const [searchArea, setSearchArea] = useState("");
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [transactions, setTransactions] = useState([]);
-  const [loadingTransactions, setLoadingTransactions] = useState(false);
 
   const fetchProducts = async () => {
     setLoadingProducts(true);
@@ -73,25 +71,11 @@ export default function Page() {
     }
   };
 
-  const fetchTransactions = async () => {
-    setLoadingTransactions(true);
-    try {
-      const res = await fetch("/api/transactions");
-      const data = await res.json();
-      setTransactions(data?.data || []);
-    } catch {
-      setTransactions([]);
-    } finally {
-      setLoadingTransactions(false);
-    }
-  };
-
   useEffect(() => {
     fetchStock();
     fetchProducts();
     fetchAreaData();
     setOtherProductsState(otherProducts);
-    fetchTransactions();
   }, []);
 
   useEffect(() => {
@@ -157,7 +141,6 @@ export default function Page() {
             { key: "products", label: "🛒 List Produk" },
             { key: "area", label: "📍 Cek Area" },
             { key: "other", label: "📝 Produk Lainnya" },
-            { key: "transactions", label: "💳 Pembelian" },
           ].map((tab) => (
             <button
               key={tab.key}
@@ -317,121 +300,79 @@ export default function Page() {
             )}
           </section>
         )}
-
-        {/* Pembelian */}
-        {activeTab === "transactions" && (
-          <section>
-            <button
-              onClick={fetchTransactions}
-              className="mb-2 px-6 py-2 bg-green-500 text-white rounded-full hover:bg-green-600 transition-colors"
-            >
-              🔄 Refresh Transaksi
-            </button>
-            {loadingTransactions ? (
-              <p className="text-white">Loading transaksi...</p>
-            ) : transactions.length === 0 ? (
-              <p className="text-gray-300 text-center">Belum ada transaksi</p>
-            ) : (
-              <div className="max-h-[400px] overflow-y-auto space-y-2">
-                {transactions.map((t, i) => (
-                  <div
-                    key={i}
-                    className={`flex justify-between items-center p-3 rounded-lg ${
-                      t.status_code === 0 ? "bg-green-600/30" : "bg-red-600/30"
-                    }`}
-                  >
-                    <div className="flex flex-col">
-                      <span className="font-semibold text-white">{t.produk}</span>
-                      <span className="text-gray-200 text-sm">{t.tujuan}</span>
-                    </div>
-                    <span
-                      className={`px-3 py-1 rounded-full text-white font-semibold ${
-                        t.status_code === 0 ? "bg-green-600" : "bg-red-600"
-                      }`}
-                    >
-                      {t.status_code === 0 ? "SUKSES" : "GAGAL"}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            )}
-          </section>
-        )}
-
-        {/* Modal Popup */}
-        {selectedProduct && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-            <div className="bg-gray-800 p-6 rounded-3xl shadow-2xl max-w-sm w-full max-h-[90vh] overflow-y-auto relative transform scale-90 opacity-0 animate-scaleFade">
-              <h2 className="text-white text-xl font-bold mb-2">{selectedProduct.nama_produk}</h2>
-              <p className="text-gray-300 mb-2">{selectedProduct.deskripsi}</p>
-
-              <p className="text-green-400 font-bold text-lg mb-4">
-                Rp{" "}
-                {selectedProduct.isOther
-                  ? Number(selectedProduct.harga_final).toLocaleString("id-ID")
-                  : (Number(selectedProduct.harga_final) + 3000 + randomPerak()).toLocaleString(
-                      "id-ID"
-                    )}
-              </p>
-
-              <p className="text-yellow-300 text-sm mb-4">
-                Silahkan transfer sesuai harga tertera, agar admin tahu Anda yang TF.
-                Setelah TF, hubungi WA admin. <br />
-                ⚠️ Semua bekasan diisi jam 06.00 pagi
-              </p>
-
-              <div className="flex flex-col items-center gap-3 mb-4">
-                <Image
-                  src="/qr.png"
-                  alt="QRIS Pembayaran"
-                  width={200}
-                  height={200}
-                  className="object-contain rounded-xl shadow-lg"
-                />
-                <a
-                  href="/qr.png"
-                  download="QRIS_DIISTORE.png"
-                  className="px-6 py-3 bg-blue-500 rounded-xl text-white font-bold hover:bg-blue-600 transition-colors"
-                >
-                  📥 Download QRIS
-                </a>
-                <a
-                  href="https://wa.me/6283863622087"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-6 py-3 bg-green-500 rounded-xl text-white font-bold hover:bg-green-600 transition-colors"
-                >
-                  💬 Hubungi Admin
-                </a>
-              </div>
-
-              <button
-                onClick={() => setSelectedProduct(null)}
-                className="absolute top-3 right-3 text-white text-xl font-bold hover:text-red-500"
-              >
-                &times;
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* Animasi scale + fade */}
-        <style jsx>{`
-          @keyframes scaleFade {
-            0% {
-              transform: scale(0.9);
-              opacity: 0;
-            }
-            100% {
-              transform: scale(1);
-              opacity: 1;
-            }
-          }
-          .animate-scaleFade {
-            animation: scaleFade 0.25s ease-out forwards;
-          }
-        `}</style>
       </div>
+
+      {/* Modal Popup */}
+      {selectedProduct && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+          <div className="bg-gray-800 p-6 rounded-3xl shadow-2xl max-w-sm w-full max-h-[90vh] overflow-y-auto relative transform scale-90 opacity-0 animate-scaleFade">
+            <h2 className="text-white text-xl font-bold mb-2">{selectedProduct.nama_produk}</h2>
+            <p className="text-gray-300 mb-2">{selectedProduct.deskripsi}</p>
+
+            <p className="text-green-400 font-bold text-lg mb-4">
+              Rp{" "}
+              {selectedProduct.isOther
+                ? Number(selectedProduct.harga_final).toLocaleString("id-ID")
+                : (Number(selectedProduct.harga_final) + 3000 + randomPerak()).toLocaleString("id-ID")}
+            </p>
+
+            <p className="text-yellow-300 text-sm mb-4">
+              Silahkan transfer sesuai harga tertera, agar admin tahu Anda yang TF.
+              Setelah TF, hubungi WA admin. <br />
+              ⚠️ Semua bekasan diisi jam 06.00 pagi
+            </p>
+
+            <div className="flex flex-col items-center gap-3 mb-4">
+              <Image
+                src="/qr.png"
+                alt="QRIS Pembayaran"
+                width={200}
+                height={200}
+                className="object-contain rounded-xl shadow-lg"
+              />
+              <a
+                href="/qr.png"
+                download="QRIS_DIISTORE.png"
+                className="px-6 py-3 bg-blue-500 rounded-xl text-white font-bold hover:bg-blue-600 transition-colors"
+              >
+                📥 Download QRIS
+              </a>
+              <a
+                href="https://wa.me/6283863622087"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-3 bg-green-500 rounded-xl text-white font-bold hover:bg-green-600 transition-colors"
+              >
+                💬 Hubungi Admin
+              </a>
+            </div>
+
+            <button
+              onClick={() => setSelectedProduct(null)}
+              className="absolute top-3 right-3 text-white text-xl font-bold hover:text-red-500"
+            >
+              &times;
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Animasi scale + fade */}
+      <style jsx>{`
+        @keyframes scaleFade {
+          0% {
+            transform: scale(0.9);
+            opacity: 0;
+          }
+          100% {
+            transform: scale(1);
+            opacity: 1;
+          }
+        }
+        .animate-scaleFade {
+          animation: scaleFade 0.25s ease-out forwards;
+        }
+      `}</style>
     </main>
   );
 }
