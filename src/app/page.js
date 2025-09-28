@@ -10,6 +10,7 @@ export default function Page() {
   const [areaData, setAreaData] = useState([]);
   const [filteredArea, setFilteredArea] = useState([]);
   const [otherProductsState, setOtherProductsState] = useState([]);
+  const [transactions, setTransactions] = useState([]); // TAB transaksi
   const [loadingProducts, setLoadingProducts] = useState(false);
   const [loadingStock, setLoadingStock] = useState(false);
   const [loadingArea, setLoadingArea] = useState(false);
@@ -78,6 +79,7 @@ export default function Page() {
     setOtherProductsState(otherProducts);
   }, []);
 
+  // Filter area
   useEffect(() => {
     if (!searchArea) {
       setFilteredArea(areaData);
@@ -92,6 +94,21 @@ export default function Page() {
       setFilteredArea(filtered);
     }
   }, [searchArea, areaData]);
+
+  // Fetch transaksi otomatis tiap 5 detik
+  useEffect(() => {
+    const interval = setInterval(async () => {
+      try {
+        const res = await fetch("/api/webhook_transactions"); // endpoint transaksi
+        const data = await res.json();
+        setTransactions(data || []);
+      } catch (err) {
+        console.error(err);
+      }
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   const getBgColor = (sisa) => {
     if (sisa === 0) return "bg-red-600/30";
@@ -141,6 +158,7 @@ export default function Page() {
             { key: "products", label: "🛒 List Produk" },
             { key: "area", label: "📍 Cek Area" },
             { key: "other", label: "📝 Produk Lainnya" },
+            { key: "transactions", label: "📄 Transaksi" }, // Tab baru
           ].map((tab) => (
             <button
               key={tab.key}
@@ -262,6 +280,32 @@ export default function Page() {
                 </div>
               ))}
             </div>
+          </section>
+        )}
+
+        {/* Transaksi */}
+        {activeTab === "transactions" && (
+          <section className="max-h-[500px] overflow-y-auto space-y-2">
+            {transactions.length === 0 ? (
+              <p className="text-gray-300 text-center">Belum ada transaksi</p>
+            ) : (
+              transactions.map((tx, idx) => (
+                <div
+                  key={idx}
+                  className={`p-3 rounded-xl flex justify-between items-center text-white ${
+                    tx.status_code === 0 ? "bg-green-700" : "bg-red-700"
+                  }`}
+                >
+                  <div>
+                    <p className="font-semibold">{tx.produk} → {tx.tujuan}</p>
+                    <p className="text-gray-200 text-sm">{tx.keterangan}</p>
+                  </div>
+                  <span className="px-2 py-1 rounded-full text-sm">
+                    {tx.status_code === 0 ? "✅ Berhasil" : "❌ Gagal"}
+                  </span>
+                </div>
+              ))
+            )}
           </section>
         )}
 
