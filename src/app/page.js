@@ -137,26 +137,28 @@ export default function Page() {
 </div>
 
         {/* Tabs */}
-        <div className="flex flex-wrap justify-center gap-2 mb-6">
-          {[
-            { key: "stock", label: "📊 Cek Stok" },
-            { key: "products", label: "🛒 List Produk" },
-            { key: "area", label: "📍 Cek Area" },
-            { key: "other", label: "📝 Produk Lainnya" },
-            { key: "buy", label: "💳 Beli" },
-          ].map((tab) => (
-            <button
-              key={tab.key}
-              onClick={() => setActiveTab(tab.key)}
-              className={`px-4 md:px-6 py-2 rounded-full font-semibold transition-all ${activeTab === tab.key
-                ? "bg-blue-500 text-white shadow-lg"
-                : "bg-gray-800 text-white border hover:shadow-md"
-                }`}
-            >
-              {tab.label}
-            </button>
-          ))}
-        </div>
+<div className="sticky top-0 z-50 bg-gray-900 py-2 flex flex-wrap justify-center gap-2 mb-6">
+  {[
+    { key: "stock", label: "📊 Cek Stok" },
+    { key: "products", label: "🛒 List Produk" },
+    { key: "area", label: "📍 Cek Area" },
+    { key: "other", label: "📝 Produk Lainnya" },
+    { key: "buy", label: "💳 Beli" },
+  ].map((tab) => (
+    <button
+      key={tab.key}
+      onClick={() => setActiveTab(tab.key)}
+      className={`px-4 md:px-6 py-2 rounded-full font-semibold transition-all ${
+        activeTab === tab.key
+          ? "bg-blue-500 text-white shadow-lg"
+          : "bg-gray-800 text-white border hover:shadow-md"
+      }`}
+    >
+      {tab.label}
+    </button>
+  ))}
+</div>
+
 
         {/* Stok */}
         {activeTab === "stock" && (
