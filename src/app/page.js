@@ -122,9 +122,18 @@ export default function Page() {
   return (
     <main className="p-4 bg-gray-900 min-h-screen flex justify-center">
       <div className="w-full max-w-4xl p-4 md:p-6 rounded-3xl shadow-2xl bg-gradient-to-br from-gray-800 via-gray-700 to-gray-900 backdrop-blur-md transition-all duration-500">
-        <h1 className="text-2xl md:text-3xl font-bold text-center mb-6 text-white drop-shadow-lg">
-          📦 DIISTORE Dashboard
-        </h1>
+        <div className="flex items-center justify-center mb-6 space-x-4">
+  <Image
+    src="/logo.png"
+    alt="DIISTORE Logo"
+    width={60}   // ukuran logo, bisa disesuaikan
+    height={60}
+    className="rounded-lg"
+  />
+  <h1 className="text-2xl md:text-3xl font-bold text-white drop-shadow-lg">
+    DIISTORE Dashboard
+  </h1>
+</div>
 
         {/* Tabs */}
         <div className="flex flex-wrap justify-center gap-2 mb-6">
