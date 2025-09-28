@@ -209,43 +209,31 @@ export default function Page() {
         )}
 
         {/* Produk */}
-{activeTab === "products" && (
-  <section>
-    {loadingProducts ? (
-      <p className="text-white">Loading produk...</p>
-    ) : (
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {products.map((p, i) => (
-          <div
-            key={i}
-            className="p-4 border rounded-2xl shadow-lg hover:shadow-2xl transition-all bg-gradient-to-br from-gray-700 to-gray-800 text-white flex flex-col justify-between"
-          >
-            <div>
-              <h3 className="font-bold text-lg mb-1">
-                {p.nama_produk} ({p.kode_produk})
-              </h3>
-              <p className="text-gray-300 text-sm mb-2">{p.kode_provider}</p>
-              <p className="text-gray-200 mb-2 whitespace-pre-line">{p.deskripsi}</p>
-              <p className="font-bold text-green-400">
-                Rp {Number(p.harga_final).toLocaleString("id-ID")}
-              </p>
-            </div>
-            <button
-              onClick={() => {
-                const randomPerak = Math.floor(Math.random() * 100) + 1;
-                const total = Number(p.harga_final) + randomPerak;
-                alert(`Transfer tepat: Rp ${total.toLocaleString("id-ID")} (Tambahan: ${randomPerak} perak)`);
-              }}
-              className="mt-4 px-4 py-2 bg-blue-500 rounded-full hover:bg-blue-600 transition-colors font-semibold"
-            >
-              🛒 Beli
-            </button>
-          </div>
-        ))}
-      </div>
-    )}
-  </section>
-)}
+        {activeTab === "products" && (
+          <section>
+            {loadingProducts ? (
+              <p className="text-white">Loading produk...</p>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {products.map((p, i) => (
+                  <div
+                    key={i}
+                    className="p-4 border rounded-2xl shadow-lg hover:shadow-2xl transition-all bg-gradient-to-br from-gray-700 to-gray-800 text-white"
+                  >
+                    <h3 className="font-bold text-lg mb-1">
+                      {p.nama_produk} ({p.kode_produk})
+                    </h3>
+                    <p className="text-gray-300 text-sm mb-2">{p.kode_provider}</p>
+                    <p className="text-gray-200 mb-2 whitespace-pre-line">{p.deskripsi}</p>
+                    <p className="font-bold text-green-400">
+                      Rp {(Number(p.harga_final) + 3000).toLocaleString("id-ID")}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            )}
+          </section>
+        )}
 
         {/* Produk Lainnya */}
         {activeTab === "other" && (
