@@ -223,7 +223,7 @@ export default function Page() {
                     <p className="font-bold text-green-400">
   Rp {(
     p.kode_produk === "BPAL1"
-      ? Number(p.harga_final) +3000 // tidak ditambah 5000
+      ? Number(p.harga_final) +3000 // ditambah 3000
       : Number(p.harga_final) + 5000 // selain BPAL1 ditambah 5000
   ).toLocaleString("id-ID")}
 </p>
@@ -319,8 +319,9 @@ export default function Page() {
               {selectedProduct.isOther
   ? Number(selectedProduct.harga_final).toLocaleString("id-ID")
   : selectedProduct.kode_produk === "BPAL1"
-    ? Number(selectedProduct.harga_final).toLocaleString("id-ID")
+    ? (Number(selectedProduct.harga_final) + 3000 + randomPerak()).toLocaleString("id-ID")
     : (Number(selectedProduct.harga_final) + 5000 + randomPerak()).toLocaleString("id-ID")}
+
 
             </p>
 
