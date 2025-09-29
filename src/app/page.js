@@ -221,7 +221,7 @@ export default function Page() {
                     <p className="text-gray-300 text-sm mb-2">{p.kode_provider}</p>
                     <p className="text-gray-200 mb-2 whitespace-pre-line">{p.deskripsi}</p>
                     <p className="font-bold text-green-400">
-                      Rp {(Number(p.harga_final) + 3000).toLocaleString("id-ID")}
+                      Rp {(Number(p.harga_final) + 5000).toLocaleString("id-ID")}
                     </p>
                     <button
                       onClick={() => setSelectedProduct({ ...p, isOther: false })}
