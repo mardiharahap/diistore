@@ -221,8 +221,13 @@ export default function Page() {
                     <p className="text-gray-300 text-sm mb-2">{p.kode_provider}</p>
                     <p className="text-gray-200 mb-2 whitespace-pre-line">{p.deskripsi}</p>
                     <p className="font-bold text-green-400">
-                      Rp {(Number(p.harga_final) + 5000).toLocaleString("id-ID")}
-                    </p>
+  Rp {(
+    p.kode_produk === "BPAL1"
+      ? Number(p.harga_final) +3000 // tidak ditambah 5000
+      : Number(p.harga_final) + 5000 // selain BPAL1 ditambah 5000
+  ).toLocaleString("id-ID")}
+</p>
+
                     <button
                       onClick={() => setSelectedProduct({ ...p, isOther: false })}
                       className="mt-2 px-4 py-2 bg-blue-500 rounded-lg text-white font-bold hover:bg-blue-600 transition-colors"
@@ -312,8 +317,11 @@ export default function Page() {
             <p className="text-green-400 font-bold text-lg mb-4">
               Rp{" "}
               {selectedProduct.isOther
-                ? Number(selectedProduct.harga_final).toLocaleString("id-ID")
-                : (Number(selectedProduct.harga_final) + 3000 + randomPerak()).toLocaleString("id-ID")}
+  ? Number(selectedProduct.harga_final).toLocaleString("id-ID")
+  : selectedProduct.kode_produk === "BPAL1"
+    ? Number(selectedProduct.harga_final).toLocaleString("id-ID")
+    : (Number(selectedProduct.harga_final) + 5000 + randomPerak()).toLocaleString("id-ID")}
+
             </p>
 
             <p className="text-yellow-300 text-sm mb-4">
