@@ -362,7 +362,7 @@ export default function Page() {
                 rel="noopener noreferrer"
                 className="px-6 py-3 bg-green-600 rounded-xl text-white font-bold hover:bg-green-700 transition-colors"
               >
-                🤖 Kirim Menu Otomatis
+                🤖 transaksi dengan BOT
               </a>
             </div>
 
