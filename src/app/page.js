@@ -135,7 +135,7 @@ export default function Page() {
         </div>
 
         {/* Tabs */}
-        <div className="sticky top-0 z-50 bg-gray-900 py-4 flex flex-wrap justify-center gap-3 shadow-md">
+<div className="sticky top-0 z-50 w-full bg-gradient-to-br from-gray-800 via-gray-700 to-gray-900 backdrop-blur-md rounded-3xl py-4 px-4 flex flex-wrap justify-center gap-3 shadow-2xl transition-all duration-500">
           {[
             { key: "stock", label: "📊 Cek Stok" },
             { key: "products", label: "🛒 List Produk" },
