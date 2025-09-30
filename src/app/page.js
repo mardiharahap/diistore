@@ -141,7 +141,6 @@ export default function Page() {
             { key: "products", label: "🛒 List Produk" },
             { key: "area", label: "📍 Cek Area" },
             { key: "other", label: "📝 Produk Lainnya" },
-            { key: "wa", label: "🤖 WA Bot" },
           ].map((tab) => (
             <button
               key={tab.key}
@@ -222,12 +221,13 @@ export default function Page() {
                     <p className="text-gray-300 text-sm mb-2">{p.kode_provider}</p>
                     <p className="text-gray-200 mb-2 whitespace-pre-line">{p.deskripsi}</p>
                     <p className="font-bold text-green-400">
-                      Rp{" "}
-                      {p.kode_produk === "BPAL1"
-                        ? Number(p.harga_final) + 3000
-                        : Number(p.harga_final) + 5000
-                      .toLocaleString("id-ID")}
-                    </p>
+  Rp {(
+    p.kode_produk === "BPAL1"
+      ? Number(p.harga_final) +3000 // ditambah 3000
+      : Number(p.harga_final) + 5000 // selain BPAL1 ditambah 5000
+  ).toLocaleString("id-ID")}
+</p>
+
                     <button
                       onClick={() => setSelectedProduct({ ...p, isOther: false })}
                       className="mt-2 px-4 py-2 bg-blue-500 rounded-lg text-white font-bold hover:bg-blue-600 transition-colors"
@@ -236,19 +236,6 @@ export default function Page() {
                     </button>
                   </div>
                 ))}
-                {/* Tambahkan WA Bot sebagai "produk" */}
-                <div
-                  className="p-4 border rounded-2xl shadow-lg hover:shadow-2xl transition-all bg-gradient-to-br from-green-600 to-green-700 text-white flex flex-col items-center justify-center"
-                >
-                  <h3 className="font-bold text-lg mb-1">WA Bot DIISTORE</h3>
-                  <p className="text-gray-200 mb-2 text-center">Klik untuk chat langsung ke WA Bot</p>
-                  <button
-                    onClick={() => setSelectedProduct({ nama_produk: "WA Bot DIISTORE", isWA: true })}
-                    className="mt-2 px-4 py-2 bg-green-500 rounded-lg text-white font-bold hover:bg-green-600 transition-colors"
-                  >
-                    💬 Chat WA Bot
-                  </button>
-                </div>
               </div>
             )}
           </section>
@@ -318,83 +305,56 @@ export default function Page() {
             )}
           </section>
         )}
-
-        {/* WA Bot Section */}
-        {activeTab === "wa" && (
-          <section className="flex flex-col items-center justify-center mt-6">
-            <button
-              onClick={() => setSelectedProduct({ nama_produk: "WA Bot DIISTORE", isWA: true })}
-              className="px-6 py-3 bg-green-500 text-white rounded-xl font-bold hover:bg-green-600 transition-colors"
-            >
-              💬 Chat ke WA Bot
-            </button>
-          </section>
-        )}
       </div>
 
       {/* Modal Popup */}
       {selectedProduct && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
           <div className="bg-gray-800 p-6 rounded-3xl shadow-2xl max-w-sm w-full max-h-[90vh] overflow-y-auto relative transform scale-90 opacity-0 animate-scaleFade">
-            
-            {selectedProduct.isWA ? (
-              <>
-                <h2 className="text-white text-xl font-bold mb-4">{selectedProduct.nama_produk}</h2>
-                <p className="text-gray-300 mb-4 text-center">
-                  Klik tombol di bawah untuk membuka chat WhatsApp langsung ke bot DIISTORE.
-                </p>
-                <a
-                  href="https://wa.me/6283867191746"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full text-center px-6 py-3 bg-green-500 rounded-xl text-white font-bold hover:bg-green-600 transition-colors"
-                >
-                  💬 Chat WA Bot
-                </a>
-              </>
-            ) : (
-              <>
-                <h2 className="text-white text-xl font-bold mb-2">{selectedProduct.nama_produk}</h2>
-                <p className="text-gray-300 mb-2">{selectedProduct.deskripsi}</p>
-                <p className="text-green-400 font-bold text-lg mb-4">
-                  Rp{" "}
-                  {selectedProduct.isOther
-                    ? Number(selectedProduct.harga_final).toLocaleString("id-ID")
-                    : selectedProduct.kode_produk === "BPAL1"
-                    ? (Number(selectedProduct.harga_final) + 3000 + randomPerak()).toLocaleString("id-ID")
-                    : (Number(selectedProduct.harga_final) + 5000 + randomPerak()).toLocaleString("id-ID")}
-                </p>
-                <p className="text-yellow-300 text-sm mb-4">
-                  Silahkan transfer sesuai harga tertera, agar admin tahu Anda yang TF.
-                  Setelah TF, hubungi WA admin. <br />
-                  ⚠️ Semua bekasan diisi jam 06.00 pagi
-                </p>
-                <div className="flex flex-col items-center gap-3 mb-4">
-                  <Image
-                    src="/qr.png"
-                    alt="QRIS Pembayaran"
-                    width={200}
-                    height={200}
-                    className="object-contain rounded-xl shadow-lg"
-                  />
-                  <a
-                    href="/qr.png"
-                    download="QRIS_DIISTORE.png"
-                    className="px-6 py-3 bg-blue-500 rounded-xl text-white font-bold hover:bg-blue-600 transition-colors"
-                  >
-                    📥 Download QRIS
-                  </a>
-                  <a
-                    href="https://wa.me/6283863622087"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-6 py-3 bg-green-500 rounded-xl text-white font-bold hover:bg-green-600 transition-colors"
-                  >
-                    💬 Hubungi Admin
-                  </a>
-                </div>
-              </>
-            )}
+            <h2 className="text-white text-xl font-bold mb-2">{selectedProduct.nama_produk}</h2>
+            <p className="text-gray-300 mb-2">{selectedProduct.deskripsi}</p>
+
+            <p className="text-green-400 font-bold text-lg mb-4">
+              Rp{" "}
+              {selectedProduct.isOther
+  ? Number(selectedProduct.harga_final).toLocaleString("id-ID")
+  : selectedProduct.kode_produk === "BPAL1"
+    ? (Number(selectedProduct.harga_final) + 3000 + randomPerak()).toLocaleString("id-ID")
+    : (Number(selectedProduct.harga_final) + 5000 + randomPerak()).toLocaleString("id-ID")}
+
+
+            </p>
+
+            <p className="text-yellow-300 text-sm mb-4">
+              Silahkan transfer sesuai harga tertera, agar admin tahu Anda yang TF.
+              Setelah TF, hubungi WA admin. <br />
+              ⚠️ Semua bekasan diisi jam 06.00 pagi
+            </p>
+
+            <div className="flex flex-col items-center gap-3 mb-4">
+              <Image
+                src="/qr.png"
+                alt="QRIS Pembayaran"
+                width={200}
+                height={200}
+                className="object-contain rounded-xl shadow-lg"
+              />
+              <a
+                href="/qr.png"
+                download="QRIS_DIISTORE.png"
+                className="px-6 py-3 bg-blue-500 rounded-xl text-white font-bold hover:bg-blue-600 transition-colors"
+              >
+                📥 Download QRIS
+              </a>
+              <a
+                href="https://wa.me/6283863622087"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-3 bg-green-500 rounded-xl text-white font-bold hover:bg-green-600 transition-colors"
+              >
+                💬 Hubungi Admin
+              </a>
+            </div>
 
             <button
               onClick={() => setSelectedProduct(null)}
