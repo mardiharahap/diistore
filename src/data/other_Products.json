@@ -5,9 +5,7 @@
   "kode_provider": "XL, Axis",
   "deskripsi": "Open Paket Bundling L1 diisi selama 30 hari penuh.\nKet: mendapatkan kuota harian sesuai area selama 30 hari penuh.\n\nRincian Area:\n- Area 1 = 8 GB/hari\n- Area 2 = 10 GB/hari\n- Area 3 = 15 GB/hari\n- Area 4 = 25 GB/hari\n\nCatatan:\n~ Official, Resmi, Bergaransi\n~ Masa aktif paket 1 hari (jika beruntung bisa mendapat 2 hari)",
   "harga_final": 45000
-}
-
-
+},
     {
         "nama_produk": "Masa Aktif 1 Bulan",
         "kode_produk": "MA1B",
@@ -171,4 +169,5 @@
     }
 
 ]
+
 
