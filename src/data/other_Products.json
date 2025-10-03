@@ -7,6 +7,13 @@
         "harga_final": 4500
     },
     {
+    "nama_produk": "Masa Aktif 45 Hari",
+    "kode_produk": "MA45H",
+    "kode_provider": "XL",
+    "deskripsi": "- Harga Rp 6.000 (tanpa perlu membayar ke XL)\n- Pulsa 0K libas\n- Pulsa di atas 50K bisa dicoba, tidak akan terpotong\n\nRincian Benefit:\n- Langsung mendapatkan masa aktif 45 Hari\n- Tidak bisa ditumpuk",
+    "harga_final": 6000
+},
+    {
         "nama_produk": "Masa Aktif 1 Tahun",
         "kode_produk": "MA1T",
         "kode_provider": "XL",
@@ -153,4 +160,5 @@
         "deskripsi": "- Paket Game 15GB\n- Expired mengikuti masaaktif XCP/XCV\n- Siapkan saldo ewalet/pulsa Rp: 7.500\nNomor harus sudah ada paket XCP/XCV",
         "harga_final": 3000
     }
+
 ]
