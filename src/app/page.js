@@ -123,32 +123,32 @@ export default function Page() {
   const randomPerak = () => Math.floor(Math.random() * 100) + 1;
 
   return (
-    <main className="p-2 sm:p-4 bg-gray-900 min-h-screen flex justify-center overflow-x-hidden">
-      <div className="w-full max-w-4xl p-3 sm:p-6 rounded-3xl shadow-2xl bg-gradient-to-br from-gray-800 via-gray-700 to-gray-900 backdrop-blur-md">
-        
-        {/* Header */}
-        <div className="flex flex-col sm:flex-row items-center justify-center text-center mb-4">
-          <div className="w-14 h-14 sm:w-16 sm:h-16 relative rounded-full overflow-hidden mb-2 sm:mb-0 sm:mr-4">
+    <main className="p-4 bg-gray-900 min-h-screen flex justify-center">
+      <div className="w-full max-w-4xl p-4 md:p-6 rounded-3xl shadow-2xl bg-gradient-to-br from-gray-800 via-gray-700 to-gray-900 backdrop-blur-md transition-all duration-500">
+        <div className="flex items-center justify-center mb-6 space-x-4">
+          <div className="w-16 h-16 relative rounded-full overflow-hidden">
             <Image src="/logo.png" alt="DIISTORE Logo" fill className="object-cover" />
           </div>
-          <h1 className="text-xl sm:text-3xl font-bold text-white">DIISTORE Dashboard</h1>
+          <h1 className="text-2xl md:text-3xl font-bold text-white drop-shadow-lg">
+            DIISTORE Dashboard
+          </h1>
         </div>
 
         {/* Tabs */}
-        <div className="sticky top-0 z-50 w-full bg-gray-800/70 backdrop-blur-md rounded-2xl py-2 px-2 flex flex-wrap justify-center gap-2 sm:gap-3 shadow-md">
+<div className="sticky top-0 z-50 w-full bg-gradient-to-br from-gray-800 via-gray-700 to-gray-900 backdrop-blur-md rounded-3xl py-4 px-4 flex flex-wrap justify-center gap-3 shadow-2xl transition-all duration-500">
           {[
-            { key: "stock", label: "📊 Stok" },
-            { key: "products", label: "🛒 Produk" },
-            { key: "area", label: "📍 Area" },
-            { key: "other", label: "📝 Lainnya" },
+            { key: "stock", label: "📊 Cek Stok" },
+            { key: "products", label: "🛒 List Produk" },
+            { key: "area", label: "📍 Cek Area" },
+            { key: "other", label: "📝 Produk Lainnya" },
           ].map((tab) => (
             <button
               key={tab.key}
               onClick={() => setActiveTab(tab.key)}
-              className={`px-4 py-2 text-sm sm:text-base rounded-full font-semibold transition-all ${
+              className={`px-6 py-2 rounded-full font-semibold transition-all ${
                 activeTab === tab.key
                   ? "bg-blue-500 text-white shadow-lg"
-                  : "bg-gray-700 text-gray-200 hover:bg-gray-600"
+                  : "bg-gray-800 text-white border hover:shadow-md"
               }`}
             >
               {tab.label}
@@ -156,37 +156,41 @@ export default function Page() {
           ))}
         </div>
 
-        {/* STOCK */}
+        {/* Stok */}
         {activeTab === "stock" && (
-          <section className="mt-4">
+          <section className="flex flex-col items-center">
             <button
               onClick={fetchStock}
-              className="mb-2 w-full sm:w-auto px-4 py-2 bg-green-500 text-white rounded-full hover:bg-green-600 transition-colors"
+              className="mb-2 px-6 py-2 bg-green-500 text-white rounded-full hover:bg-green-600 transition-colors"
             >
               🔄 Refresh Stock
             </button>
-            <p className="text-yellow-400 text-xs sm:text-sm text-center mb-3">
-              ⚠️ Restok setiap jam 06:00 pagi
+            <p className="text-yellow-400 text-sm text-center mb-4">
+              ⚠️ Restok Bekasan dan Bulanan setiap jam 06:00
             </p>
             {loadingStock ? (
-              <p className="text-white text-center">Memuat stok...</p>
+              <p className="text-white">Loading stock...</p>
             ) : (
-              <div className="space-y-2">
+              <div className="w-full bg-gray-800 rounded-2xl p-2 md:p-4 shadow-inner space-y-2">
                 {stock
                   .sort((a, b) => b.sisa_slot - a.sisa_slot)
                   .map((s, i) => (
                     <div
                       key={i}
-                      className={`flex justify-between items-center p-2 sm:p-3 rounded-xl ${getBgColor(
+                      className={`flex justify-between items-center p-2 md:p-3 rounded-lg ${getBgColor(
                         s.sisa_slot
-                      )} hover:scale-[1.02] transition-transform`}
+                      )} transition-transform duration-300 transform hover:scale-105`}
                     >
-                      <div>
-                        <span className="font-semibold text-white text-sm sm:text-base">{s.type}</span>
-                        <div className="text-gray-300 text-xs sm:text-sm">{s.nama}</div>
+                      <div className="flex flex-col">
+                        <span className="font-semibold text-sm md:text-base capitalize text-white">
+                          {s.type}
+                        </span>
+                        <span className="text-gray-200 text-xs md:text-sm font-medium">
+                          {s.nama}
+                        </span>
                       </div>
                       <span
-                        className={`px-3 py-1 text-xs sm:text-sm rounded-full text-white font-semibold ${getBadgeColor(
+                        className={`px-2 md:px-3 py-1 rounded-full text-white text-xs md:text-sm font-semibold ${getBadgeColor(
                           s.sisa_slot
                         )}`}
                       >
@@ -199,26 +203,25 @@ export default function Page() {
           </section>
         )}
 
-        {/* PRODUCTS */}
+        {/* Produk */}
         {activeTab === "products" && (
-          <section className="mt-4">
+          <section>
             {loadingProducts ? (
-              <p className="text-white text-center">Memuat produk...</p>
+              <p className="text-white">Loading produk...</p>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {products.map((p, i) => (
                   <div
                     key={i}
-                    className="p-3 sm:p-4 bg-gray-800 rounded-2xl shadow-md hover:shadow-xl transition-all text-white"
+                    className="p-4 border rounded-2xl shadow-lg hover:shadow-2xl transition-all bg-gradient-to-br from-gray-700 to-gray-800 text-white"
                   >
-                    <h3 className="font-bold text-base sm:text-lg">
+                    <h3 className="font-bold text-lg mb-1">
                       {p.nama_produk} ({p.kode_produk})
                     </h3>
-                    <p className="text-gray-400 text-xs sm:text-sm">{p.kode_provider}</p>
-                    <p className="text-gray-300 text-sm mt-1 whitespace-pre-line">{p.deskripsi}</p>
-                    <p className="font-bold text-green-400 mt-2">
-                      Rp{" "}
-                      {(
+                    <p className="text-gray-300 text-sm mb-2">{p.kode_provider}</p>
+                    <p className="text-gray-200 mb-2 whitespace-pre-line">{p.deskripsi}</p>
+                    <p className="font-bold text-green-400">
+                      Rp {(
                         p.kode_produk === "BPAL1"
                           ? Number(p.harga_final) + 3000
                           : Number(p.harga_final) + 5000
@@ -226,7 +229,7 @@ export default function Page() {
                     </p>
                     <button
                       onClick={() => setSelectedProduct({ ...p, isOther: false })}
-                      className="mt-2 w-full bg-blue-500 py-2 rounded-lg font-semibold hover:bg-blue-600"
+                      className="mt-2 px-4 py-2 bg-blue-500 rounded-lg text-white font-bold hover:bg-blue-600 transition-colors"
                     >
                       Beli
                     </button>
@@ -237,26 +240,26 @@ export default function Page() {
           </section>
         )}
 
-        {/* OTHER PRODUCTS */}
+        {/* Produk Lainnya */}
         {activeTab === "other" && (
-          <section className="mt-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <section>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {otherProductsState.map((p, i) => (
                 <div
                   key={i}
-                  className="p-3 bg-gray-800 rounded-2xl shadow-md text-white hover:shadow-xl transition-all"
+                  className="p-4 border rounded-2xl shadow-lg hover:shadow-2xl transition-all bg-gradient-to-br from-gray-700 to-gray-800 text-white"
                 >
-                  <h3 className="font-bold text-base sm:text-lg">
+                  <h3 className="font-bold text-lg mb-1">
                     {p.nama_produk} ({p.kode_produk})
                   </h3>
-                  <p className="text-gray-400 text-xs sm:text-sm">{p.kode_provider}</p>
-                  <p className="text-gray-300 text-sm mt-1 whitespace-pre-line">{p.deskripsi}</p>
-                  <p className="font-bold text-green-400 mt-2">
+                  <p className="text-gray-300 text-sm mb-2">{p.kode_provider}</p>
+                  <p className="text-gray-200 mb-2 whitespace-pre-line">{p.deskripsi}</p>
+                  <p className="font-bold text-green-400">
                     Rp {Number(p.harga_final).toLocaleString("id-ID")}
                   </p>
                   <button
                     onClick={() => setSelectedProduct({ ...p, isOther: true })}
-                    className="mt-2 w-full bg-blue-500 py-2 rounded-lg font-semibold hover:bg-blue-600"
+                    className="mt-2 px-4 py-2 bg-blue-500 rounded-lg text-white font-bold hover:bg-blue-600 transition-colors"
                   >
                     Beli
                   </button>
@@ -266,36 +269,36 @@ export default function Page() {
           </section>
         )}
 
-        {/* AREA */}
+        {/* Area */}
         {activeTab === "area" && (
-          <section className="mt-4">
+          <section>
             <input
               type="text"
               value={searchArea}
               onChange={(e) => setSearchArea(e.target.value)}
               placeholder="Cari provinsi/kabupaten/area..."
-              className="w-full p-2 sm:p-3 rounded-xl mb-3 text-black"
+              className="w-full p-3 rounded-xl mb-4 text-black"
             />
             {loadingArea ? (
-              <p className="text-white text-center">Memuat area...</p>
+              <p className="text-white">Loading area...</p>
             ) : (
               <div className="max-h-[400px] overflow-y-auto space-y-2">
                 {filteredArea.map((item, index) => (
                   <div
                     key={index}
-                    className="flex justify-between items-center p-2 bg-gray-700 rounded-lg text-white text-sm"
+                    className="flex justify-between p-3 bg-gray-700 rounded-lg text-white"
                   >
-                    <div>
+                    <div className="flex flex-col">
                       <span className="font-semibold">{highlight(item.provinsi)}</span>
-                      <div className="text-gray-300 text-xs">{highlight(item.kabupaten)}</div>
+                      <span className="text-gray-300 text-sm">{highlight(item.kabupaten)}</span>
                     </div>
-                    <span className="px-2 py-1 bg-blue-600 rounded-full text-xs sm:text-sm">
+                    <span className="px-2 py-1 bg-blue-600 rounded-full text-sm">
                       {highlight(item.area)}
                     </span>
                   </div>
                 ))}
                 {filteredArea.length === 0 && (
-                  <p className="text-gray-300 text-center">Tidak ada data ditemukan</p>
+                  <p className="text-gray-300 text-center">Tidak ada data</p>
                 )}
               </div>
             )}
@@ -303,13 +306,14 @@ export default function Page() {
         )}
       </div>
 
-      {/* MODAL */}
+      {/* Modal Popup */}
       {selectedProduct && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4">
-          <div className="bg-gray-800 p-4 sm:p-6 rounded-2xl shadow-2xl w-full max-w-sm relative animate-scaleFade">
-            <h2 className="text-white text-lg font-bold mb-1">{selectedProduct.nama_produk}</h2>
-            <p className="text-gray-300 text-sm mb-2">{selectedProduct.deskripsi}</p>
-            <p className="text-green-400 font-bold text-lg mb-3">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+          <div className="bg-gray-800 p-6 rounded-3xl shadow-2xl max-w-sm w-full max-h-[90vh] overflow-y-auto relative transform scale-90 opacity-0 animate-scaleFade">
+            <h2 className="text-white text-xl font-bold mb-2">{selectedProduct.nama_produk}</h2>
+            <p className="text-gray-300 mb-2">{selectedProduct.deskripsi}</p>
+
+            <p className="text-green-400 font-bold text-lg mb-4">
               Rp{" "}
               {selectedProduct.isOther
                 ? Number(selectedProduct.harga_final).toLocaleString("id-ID")
@@ -322,23 +326,24 @@ export default function Page() {
                   )}
             </p>
 
-            <p className="text-yellow-300 text-xs mb-3 leading-relaxed">
-              Transfer sesuai harga di atas agar admin tahu itu Anda. Setelah TF, hubungi admin.
-              <br />⚠️ Restok jam 06.00 pagi.
+            <p className="text-yellow-300 text-sm mb-4">
+              Silahkan transfer sesuai harga tertera, agar admin tahu Anda yang TF.
+              Setelah TF, hubungi WA admin. <br />
+              ⚠️ Semua bekasan diisi jam 06.00 pagi
             </p>
 
-            <div className="flex flex-col items-center gap-2">
+            <div className="flex flex-col items-center gap-3 mb-4">
               <Image
                 src="/qr.png"
-                alt="QRIS"
-                width={180}
-                height={180}
-                className="rounded-xl shadow-md"
+                alt="QRIS Pembayaran"
+                width={200}
+                height={200}
+                className="object-contain rounded-xl shadow-lg"
               />
               <a
                 href="/qr.png"
                 download="QRIS_DIISTORE.png"
-                className="w-full text-center bg-blue-500 text-white font-bold py-2 rounded-lg hover:bg-blue-600"
+                className="px-6 py-3 bg-blue-500 rounded-xl text-white font-bold hover:bg-blue-600 transition-colors"
               >
                 📥 Download QRIS
               </a>
@@ -346,23 +351,24 @@ export default function Page() {
                 href="https://wa.me/6283863622087"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full text-center bg-green-500 text-white font-bold py-2 rounded-lg hover:bg-green-600"
+                className="px-6 py-3 bg-green-500 rounded-xl text-white font-bold hover:bg-green-600 transition-colors"
               >
                 💬 Hubungi Admin
               </a>
+              {/* Tombol baru kirim menu otomatis */}
               <a
                 href="https://wa.me/6283867191746?text=menu"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full text-center bg-green-600 text-white font-bold py-2 rounded-lg hover:bg-green-700"
+                className="px-6 py-3 bg-green-600 rounded-xl text-white font-bold hover:bg-green-700 transition-colors"
               >
-                🤖 Transaksi via BOT
+                🤖 transaksi dengan BOT
               </a>
             </div>
 
             <button
               onClick={() => setSelectedProduct(null)}
-              className="absolute top-2 right-3 text-white text-2xl hover:text-red-500"
+              className="absolute top-3 right-3 text-white text-xl font-bold hover:text-red-500"
             >
               &times;
             </button>
@@ -370,6 +376,7 @@ export default function Page() {
         </div>
       )}
 
+      {/* Animasi scale + fade */}
       <style jsx>{`
         @keyframes scaleFade {
           0% {
