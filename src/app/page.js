@@ -15,7 +15,6 @@ export default function Page() {
   const [loadingArea, setLoadingArea] = useState(false);
   const [searchArea, setSearchArea] = useState("");
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [refreshing, setRefreshing] = useState(false);
 
   const fetchProducts = async () => {
     setLoadingProducts(true);
@@ -32,7 +31,6 @@ export default function Page() {
 
   const fetchStock = async () => {
     setLoadingStock(true);
-    setRefreshing(true);
     try {
       const res = await fetch("/api/cek_stock");
       const data = await res.json();
@@ -41,7 +39,6 @@ export default function Page() {
       setStock([]);
     } finally {
       setLoadingStock(false);
-      setTimeout(() => setRefreshing(false), 500);
     }
   };
 
@@ -126,8 +123,9 @@ export default function Page() {
   const randomPerak = () => Math.floor(Math.random() * 100) + 1;
 
   return (
-    <main className="p-2 sm:p-4 bg-gray-900 min-h-screen flex justify-center overflow-x-hidden">
-      <div className="w-full max-w-4xl p-3 sm:p-6 rounded-3xl shadow-2xl bg-gradient-to-br from-gray-800 via-gray-700 to-gray-900 backdrop-blur-md">
+    <main className="p-2 sm:p-4 bg-gray-900 min-h-screen flex justify-center">
+      <div className="w-full max-w-4xl p-3 sm:p-6 rounded-3xl shadow-2xl bg-gradient-to-br from-gray-800 via-gray-700 to-gray-900 backdrop-blur-md relative">
+        
         {/* Header */}
         <div className="flex flex-col sm:flex-row items-center justify-center text-center mb-4">
           <div className="w-14 h-14 sm:w-16 sm:h-16 relative rounded-full overflow-hidden mb-2 sm:mb-0 sm:mr-4">
@@ -136,8 +134,8 @@ export default function Page() {
           <h1 className="text-xl sm:text-3xl font-bold text-white">DIISTORE Dashboard</h1>
         </div>
 
-        {/* Tabs */}
-        <div className="sticky top-0 z-50 w-full bg-gray-800/90 backdrop-blur-md rounded-2xl py-2 px-2 flex flex-wrap justify-center gap-2 sm:gap-3 shadow-lg">
+        {/* Sticky Tabs */}
+        <div className="sticky top-0 z-50 w-full bg-gray-800/90 backdrop-blur-lg rounded-2xl py-2 px-2 flex flex-wrap justify-center gap-2 sm:gap-3 shadow-lg border border-gray-700">
           {[
             { key: "stock", label: "📊 Stok" },
             { key: "products", label: "🛒 Produk" },
@@ -147,7 +145,7 @@ export default function Page() {
             <button
               key={tab.key}
               onClick={() => setActiveTab(tab.key)}
-              className={`px-4 py-2 text-sm sm:text-base rounded-full font-semibold transform transition-all duration-150 hover:scale-105 active:scale-95 ${
+              className={`px-4 py-2 text-sm sm:text-base rounded-full font-semibold transition-all ${
                 activeTab === tab.key
                   ? "bg-blue-500 text-white shadow-lg"
                   : "bg-gray-700 text-gray-200 hover:bg-gray-600"
@@ -158,63 +156,133 @@ export default function Page() {
           ))}
         </div>
 
-        {/* STOCK */}
-        {activeTab === "stock" && (
-          <section className="mt-4">
-            <button
-              onClick={fetchStock}
-              disabled={refreshing}
-              className={`mb-2 w-full sm:w-auto px-4 py-2 bg-green-500 text-white rounded-full flex items-center justify-center gap-2 font-semibold transform transition-transform duration-150 hover:scale-105 active:scale-95 ${
-                refreshing ? "opacity-70 cursor-not-allowed" : "hover:bg-green-600"
-              }`}
-            >
-              🔄 {refreshing ? "Merefresh..." : "Refresh Stock"}
-            </button>
-            <p className="text-yellow-400 text-xs sm:text-sm text-center mb-3">
-              ⚠️ Restok setiap jam 06:00 pagi
-            </p>
-            {loadingStock ? (
-              <p className="text-white text-center">Memuat stok...</p>
-            ) : (
-              <div className="space-y-2">
-                {stock
-                  .sort((a, b) => b.sisa_slot - a.sisa_slot)
-                  .map((s, i) => (
+        {/* Content wrapper with scroll */}
+        <div className="mt-4 overflow-y-auto max-h-[80vh] pr-1 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
+          {/* STOCK */}
+          {activeTab === "stock" && (
+            <section>
+              <button
+                onClick={fetchStock}
+                className="mb-2 w-full sm:w-auto px-4 py-2 bg-green-500 text-white rounded-full hover:bg-green-600 transition-colors"
+              >
+                🔄 Refresh Stock
+              </button>
+              <p className="text-yellow-400 text-xs sm:text-sm text-center mb-3">
+                ⚠️ Restok setiap jam 06:00 pagi
+              </p>
+              {loadingStock ? (
+                <p className="text-white text-center">Memuat stok...</p>
+              ) : (
+                <div className="space-y-2">
+                  {stock
+                    .sort((a, b) => b.sisa_slot - a.sisa_slot)
+                    .map((s, i) => (
+                      <div
+                        key={i}
+                        className={`flex justify-between items-center p-2 sm:p-3 rounded-xl ${getBgColor(
+                          s.sisa_slot
+                        )} hover:scale-[1.02] transition-transform`}
+                      >
+                        <div>
+                          <span className="font-semibold text-white text-sm sm:text-base">{s.type}</span>
+                          <div className="text-gray-300 text-xs sm:text-sm">{s.nama}</div>
+                        </div>
+                        <span
+                          className={`px-3 py-1 text-xs sm:text-sm rounded-full text-white font-semibold ${getBadgeColor(
+                            s.sisa_slot
+                          )}`}
+                        >
+                          {s.sisa_slot} unit
+                        </span>
+                      </div>
+                    ))}
+                </div>
+              )}
+            </section>
+          )}
+
+          {/* PRODUCTS */}
+          {activeTab === "products" && (
+            <section>
+              {loadingProducts ? (
+                <p className="text-white text-center">Memuat produk...</p>
+              ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {products.map((p, i) => (
                     <div
                       key={i}
-                      className={`flex justify-between items-center p-2 sm:p-3 rounded-xl ${getBgColor(
-                        s.sisa_slot
-                      )} hover:scale-[1.02] active:scale-[0.98] transform transition-transform duration-150`}
+                      className="p-3 sm:p-4 bg-gray-800 rounded-2xl shadow-md hover:shadow-xl transition-all text-white"
+                    >
+                      <h3 className="font-bold text-base sm:text-lg">
+                        {p.nama_produk} ({p.kode_produk})
+                      </h3>
+                      <p className="text-gray-400 text-xs sm:text-sm">{p.kode_provider}</p>
+                      <p className="text-gray-300 text-sm mt-1 whitespace-pre-line">{p.deskripsi}</p>
+                      <p className="font-bold text-green-400 mt-2">
+                        Rp{" "}
+                        {(
+                          p.kode_produk === "BPAL1"
+                            ? Number(p.harga_final) + 3000
+                            : Number(p.harga_final) + 5000
+                        ).toLocaleString("id-ID")}
+                      </p>
+                      <button
+                        onClick={() => setSelectedProduct({ ...p, isOther: false })}
+                        className="mt-2 w-full bg-blue-500 py-2 rounded-lg font-semibold hover:bg-blue-600"
+                      >
+                        Beli
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </section>
+          )}
+
+          {/* AREA */}
+          {activeTab === "area" && (
+            <section>
+              <input
+                type="text"
+                value={searchArea}
+                onChange={(e) => setSearchArea(e.target.value)}
+                placeholder="Cari provinsi/kabupaten/area..."
+                className="w-full p-2 sm:p-3 rounded-xl mb-3 text-black"
+              />
+              {loadingArea ? (
+                <p className="text-white text-center">Memuat area...</p>
+              ) : (
+                <div className="max-h-[400px] overflow-y-auto space-y-2">
+                  {filteredArea.map((item, index) => (
+                    <div
+                      key={index}
+                      className="flex justify-between items-center p-2 bg-gray-700 rounded-lg text-white text-sm"
                     >
                       <div>
-                        <span className="font-semibold text-white text-sm sm:text-base">{s.type}</span>
-                        <div className="text-gray-300 text-xs sm:text-sm">{s.nama}</div>
+                        <span className="font-semibold">{highlight(item.provinsi)}</span>
+                        <div className="text-gray-300 text-xs">{highlight(item.kabupaten)}</div>
                       </div>
-                      <span
-                        className={`px-3 py-1 text-xs sm:text-sm rounded-full text-white font-semibold ${getBadgeColor(
-                          s.sisa_slot
-                        )}`}
-                      >
-                        {s.sisa_slot} unit
+                      <span className="px-2 py-1 bg-blue-600 rounded-full text-xs sm:text-sm">
+                        {highlight(item.area)}
                       </span>
                     </div>
                   ))}
-              </div>
-            )}
-          </section>
-        )}
+                  {filteredArea.length === 0 && (
+                    <p className="text-gray-300 text-center">Tidak ada data ditemukan</p>
+                  )}
+                </div>
+              )}
+            </section>
+          )}
 
-        {/* PRODUCTS */}
-        {activeTab === "products" && (
-          <section className="mt-4">
-            {loadingProducts ? (
-              <p className="text-white text-center">Memuat produk...</p>
-            ) : (
+          {/* OTHER PRODUCTS */}
+          {activeTab === "other" && (
+            <section>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {products.map((p, i) => (
+                {otherProductsState.map((p, i) => (
                   <div
                     key={i}
-                    className="p-3 sm:p-4 bg-gray-800 rounded-2xl shadow-md hover:shadow-xl transform transition-all duration-150 hover:scale-[1.02] active:scale-[0.98] text-white"
+                    className="p-3 bg-gray-800 rounded-2xl shadow-md text-white hover:shadow-xl transition-all"
                   >
                     <h3 className="font-bold text-base sm:text-lg">
                       {p.nama_produk} ({p.kode_produk})
@@ -222,90 +290,20 @@ export default function Page() {
                     <p className="text-gray-400 text-xs sm:text-sm">{p.kode_provider}</p>
                     <p className="text-gray-300 text-sm mt-1 whitespace-pre-line">{p.deskripsi}</p>
                     <p className="font-bold text-green-400 mt-2">
-                      Rp{" "}
-                      {(
-                        p.kode_produk === "BPAL1"
-                          ? Number(p.harga_final) + 3000
-                          : Number(p.harga_final) + 5000
-                      ).toLocaleString("id-ID")}
+                      Rp {Number(p.harga_final).toLocaleString("id-ID")}
                     </p>
                     <button
-                      onClick={() => setSelectedProduct({ ...p, isOther: false })}
-                      className="mt-2 w-full bg-blue-500 py-2 rounded-lg font-semibold text-white hover:bg-blue-600 transform transition-transform duration-150 hover:scale-105 active:scale-95"
+                      onClick={() => setSelectedProduct({ ...p, isOther: true })}
+                      className="mt-2 w-full bg-blue-500 py-2 rounded-lg font-semibold hover:bg-blue-600"
                     >
                       Beli
                     </button>
                   </div>
                 ))}
               </div>
-            )}
-          </section>
-        )}
-
-        {/* OTHER PRODUCTS */}
-        {activeTab === "other" && (
-          <section className="mt-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {otherProductsState.map((p, i) => (
-                <div
-                  key={i}
-                  className="p-3 bg-gray-800 rounded-2xl shadow-md text-white hover:shadow-xl transform transition-all duration-150 hover:scale-[1.02] active:scale-[0.98]"
-                >
-                  <h3 className="font-bold text-base sm:text-lg">
-                    {p.nama_produk} ({p.kode_produk})
-                  </h3>
-                  <p className="text-gray-400 text-xs sm:text-sm">{p.kode_provider}</p>
-                  <p className="text-gray-300 text-sm mt-1 whitespace-pre-line">{p.deskripsi}</p>
-                  <p className="font-bold text-green-400 mt-2">
-                    Rp {Number(p.harga_final).toLocaleString("id-ID")}
-                  </p>
-                  <button
-                    onClick={() => setSelectedProduct({ ...p, isOther: true })}
-                    className="mt-2 w-full bg-blue-500 py-2 rounded-lg font-semibold text-white hover:bg-blue-600 transform transition-transform duration-150 hover:scale-105 active:scale-95"
-                  >
-                    Beli
-                  </button>
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* AREA */}
-        {activeTab === "area" && (
-          <section className="mt-4">
-            <input
-              type="text"
-              value={searchArea}
-              onChange={(e) => setSearchArea(e.target.value)}
-              placeholder="Cari provinsi/kabupaten/area..."
-              className="w-full p-2 sm:p-3 rounded-xl mb-3 text-black"
-            />
-            {loadingArea ? (
-              <p className="text-white text-center">Memuat area...</p>
-            ) : (
-              <div className="max-h-[400px] overflow-y-auto space-y-2">
-                {filteredArea.map((item, index) => (
-                  <div
-                    key={index}
-                    className="flex justify-between items-center p-2 bg-gray-700 rounded-lg text-white text-sm transform transition-transform duration-150 hover:scale-[1.02] active:scale-[0.98]"
-                  >
-                    <div>
-                      <span className="font-semibold">{highlight(item.provinsi)}</span>
-                      <div className="text-gray-300 text-xs">{highlight(item.kabupaten)}</div>
-                    </div>
-                    <span className="px-2 py-1 bg-blue-600 rounded-full text-xs sm:text-sm">
-                      {highlight(item.area)}
-                    </span>
-                  </div>
-                ))}
-                {filteredArea.length === 0 && (
-                  <p className="text-gray-300 text-center">Tidak ada data ditemukan</p>
-                )}
-              </div>
-            )}
-          </section>
-        )}
+            </section>
+          )}
+        </div>
       </div>
 
       {/* MODAL */}
@@ -319,12 +317,8 @@ export default function Page() {
               {selectedProduct.isOther
                 ? Number(selectedProduct.harga_final).toLocaleString("id-ID")
                 : selectedProduct.kode_produk === "BPAL1"
-                ? (Number(selectedProduct.harga_final) + 3000 + randomPerak()).toLocaleString(
-                    "id-ID"
-                  )
-                : (Number(selectedProduct.harga_final) + 5000 + randomPerak()).toLocaleString(
-                    "id-ID"
-                  )}
+                ? (Number(selectedProduct.harga_final) + 3000 + randomPerak()).toLocaleString("id-ID")
+                : (Number(selectedProduct.harga_final) + 5000 + randomPerak()).toLocaleString("id-ID")}
             </p>
 
             <p className="text-yellow-300 text-xs mb-3 leading-relaxed">
@@ -333,17 +327,11 @@ export default function Page() {
             </p>
 
             <div className="flex flex-col items-center gap-2">
-              <Image
-                src="/qr.png"
-                alt="QRIS"
-                width={180}
-                height={180}
-                className="rounded-xl shadow-md"
-              />
+              <Image src="/qr.png" alt="QRIS" width={180} height={180} className="rounded-xl shadow-md" />
               <a
                 href="/qr.png"
                 download="QRIS_DIISTORE.png"
-                className="w-full text-center bg-blue-500 text-white font-bold py-2 rounded-lg hover:bg-blue-600 transform transition-transform duration-150 hover:scale-105 active:scale-95"
+                className="w-full text-center bg-blue-500 text-white font-bold py-2 rounded-lg hover:bg-blue-600"
               >
                 📥 Download QRIS
               </a>
@@ -351,7 +339,7 @@ export default function Page() {
                 href="https://wa.me/6283863622087"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full text-center bg-green-500 text-white font-bold py-2 rounded-lg hover:bg-green-600 transform transition-transform duration-150 hover:scale-105 active:scale-95"
+                className="w-full text-center bg-green-500 text-white font-bold py-2 rounded-lg hover:bg-green-600"
               >
                 💬 Hubungi Admin
               </a>
@@ -359,7 +347,7 @@ export default function Page() {
                 href="https://wa.me/6283867191746?text=menu"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full text-center bg-green-600 text-white font-bold py-2 rounded-lg hover:bg-green-700 transform transition-transform duration-150 hover:scale-105 active:scale-95"
+                className="w-full text-center bg-green-600 text-white font-bold py-2 rounded-lg hover:bg-green-700"
               >
                 🤖 Transaksi via BOT
               </a>
@@ -367,7 +355,7 @@ export default function Page() {
 
             <button
               onClick={() => setSelectedProduct(null)}
-              className="absolute top-2 right-3 text-white text-2xl hover:text-red-500 transform transition-transform duration-150 hover:scale-110 active:scale-90"
+              className="absolute top-2 right-3 text-white text-2xl hover:text-red-500"
             >
               &times;
             </button>
