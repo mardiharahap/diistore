@@ -145,16 +145,20 @@ export default function Page() {
             { key: "other", label: "📝 Lainnya" },
           ].map((tab) => (
             <button
-              key={tab.key}
-              onClick={() => setActiveTab(tab.key)}
-              className={`px-4 py-2 text-sm sm:text-base rounded-full font-semibold transition-all ${
+  key={tab.key}
+  onClick={() => setActiveTab(tab.key)}
+  className={`px-4 py-2 text-sm sm:text-base rounded-full font-semibold 
+              transform transition-all duration-150 
+              active:scale-95 hover:scale-105
+              ${
                 activeTab === tab.key
                   ? "bg-blue-500 text-white shadow-lg"
                   : "bg-gray-700 text-gray-200 hover:bg-gray-600"
               }`}
-            >
-              {tab.label}
-            </button>
+>
+  {tab.label}
+</button>
+
           ))}
         </div>
 
