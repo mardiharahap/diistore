@@ -41,7 +41,7 @@ export default function Page() {
       setStock([]);
     } finally {
       setLoadingStock(false);
-      setTimeout(() => setRefreshing(false), 600); // efek animasi berhenti
+      setTimeout(() => setRefreshing(false), 500);
     }
   };
 
@@ -136,7 +136,7 @@ export default function Page() {
           <h1 className="text-xl sm:text-3xl font-bold text-white">DIISTORE Dashboard</h1>
         </div>
 
-        {/* Tabs - sticky agar tetap di atas */}
+        {/* Tabs */}
         <div className="sticky top-0 z-50 w-full bg-gray-800/90 backdrop-blur-md rounded-2xl py-2 px-2 flex flex-wrap justify-center gap-2 sm:gap-3 shadow-lg">
           {[
             { key: "stock", label: "📊 Stok" },
@@ -145,20 +145,16 @@ export default function Page() {
             { key: "other", label: "📝 Lainnya" },
           ].map((tab) => (
             <button
-  key={tab.key}
-  onClick={() => setActiveTab(tab.key)}
-  className={`px-4 py-2 text-sm sm:text-base rounded-full font-semibold 
-              transform transition-all duration-150 
-              active:scale-95 hover:scale-105
-              ${
+              key={tab.key}
+              onClick={() => setActiveTab(tab.key)}
+              className={`px-4 py-2 text-sm sm:text-base rounded-full font-semibold transform transition-all duration-150 hover:scale-105 active:scale-95 ${
                 activeTab === tab.key
                   ? "bg-blue-500 text-white shadow-lg"
                   : "bg-gray-700 text-gray-200 hover:bg-gray-600"
               }`}
->
-  {tab.label}
-</button>
-
+            >
+              {tab.label}
+            </button>
           ))}
         </div>
 
@@ -167,8 +163,9 @@ export default function Page() {
           <section className="mt-4">
             <button
               onClick={fetchStock}
-              className={`mb-2 w-full sm:w-auto px-4 py-2 bg-green-500 text-white rounded-full flex items-center justify-center gap-2 font-semibold hover:bg-green-600 transition-all ${
-                refreshing ? "animate-spin-slow" : ""
+              disabled={refreshing}
+              className={`mb-2 w-full sm:w-auto px-4 py-2 bg-green-500 text-white rounded-full flex items-center justify-center gap-2 font-semibold transform transition-transform duration-150 hover:scale-105 active:scale-95 ${
+                refreshing ? "opacity-70 cursor-not-allowed" : "hover:bg-green-600"
               }`}
             >
               🔄 {refreshing ? "Merefresh..." : "Refresh Stock"}
@@ -187,7 +184,7 @@ export default function Page() {
                       key={i}
                       className={`flex justify-between items-center p-2 sm:p-3 rounded-xl ${getBgColor(
                         s.sisa_slot
-                      )} hover:scale-[1.02] transition-transform`}
+                      )} hover:scale-[1.02] active:scale-[0.98] transform transition-transform duration-150`}
                     >
                       <div>
                         <span className="font-semibold text-white text-sm sm:text-base">{s.type}</span>
@@ -217,7 +214,7 @@ export default function Page() {
                 {products.map((p, i) => (
                   <div
                     key={i}
-                    className="p-3 sm:p-4 bg-gray-800 rounded-2xl shadow-md hover:shadow-xl transition-all text-white"
+                    className="p-3 sm:p-4 bg-gray-800 rounded-2xl shadow-md hover:shadow-xl transform transition-all duration-150 hover:scale-[1.02] active:scale-[0.98] text-white"
                   >
                     <h3 className="font-bold text-base sm:text-lg">
                       {p.nama_produk} ({p.kode_produk})
@@ -234,7 +231,7 @@ export default function Page() {
                     </p>
                     <button
                       onClick={() => setSelectedProduct({ ...p, isOther: false })}
-                      className="mt-2 w-full bg-blue-500 py-2 rounded-lg font-semibold hover:bg-blue-600"
+                      className="mt-2 w-full bg-blue-500 py-2 rounded-lg font-semibold text-white hover:bg-blue-600 transform transition-transform duration-150 hover:scale-105 active:scale-95"
                     >
                       Beli
                     </button>
@@ -252,7 +249,7 @@ export default function Page() {
               {otherProductsState.map((p, i) => (
                 <div
                   key={i}
-                  className="p-3 bg-gray-800 rounded-2xl shadow-md text-white hover:shadow-xl transition-all"
+                  className="p-3 bg-gray-800 rounded-2xl shadow-md text-white hover:shadow-xl transform transition-all duration-150 hover:scale-[1.02] active:scale-[0.98]"
                 >
                   <h3 className="font-bold text-base sm:text-lg">
                     {p.nama_produk} ({p.kode_produk})
@@ -264,7 +261,7 @@ export default function Page() {
                   </p>
                   <button
                     onClick={() => setSelectedProduct({ ...p, isOther: true })}
-                    className="mt-2 w-full bg-blue-500 py-2 rounded-lg font-semibold hover:bg-blue-600"
+                    className="mt-2 w-full bg-blue-500 py-2 rounded-lg font-semibold text-white hover:bg-blue-600 transform transition-transform duration-150 hover:scale-105 active:scale-95"
                   >
                     Beli
                   </button>
@@ -291,7 +288,7 @@ export default function Page() {
                 {filteredArea.map((item, index) => (
                   <div
                     key={index}
-                    className="flex justify-between items-center p-2 bg-gray-700 rounded-lg text-white text-sm"
+                    className="flex justify-between items-center p-2 bg-gray-700 rounded-lg text-white text-sm transform transition-transform duration-150 hover:scale-[1.02] active:scale-[0.98]"
                   >
                     <div>
                       <span className="font-semibold">{highlight(item.provinsi)}</span>
@@ -346,7 +343,7 @@ export default function Page() {
               <a
                 href="/qr.png"
                 download="QRIS_DIISTORE.png"
-                className="w-full text-center bg-blue-500 text-white font-bold py-2 rounded-lg hover:bg-blue-600"
+                className="w-full text-center bg-blue-500 text-white font-bold py-2 rounded-lg hover:bg-blue-600 transform transition-transform duration-150 hover:scale-105 active:scale-95"
               >
                 📥 Download QRIS
               </a>
@@ -354,7 +351,7 @@ export default function Page() {
                 href="https://wa.me/6283863622087"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full text-center bg-green-500 text-white font-bold py-2 rounded-lg hover:bg-green-600"
+                className="w-full text-center bg-green-500 text-white font-bold py-2 rounded-lg hover:bg-green-600 transform transition-transform duration-150 hover:scale-105 active:scale-95"
               >
                 💬 Hubungi Admin
               </a>
@@ -362,7 +359,7 @@ export default function Page() {
                 href="https://wa.me/6283867191746?text=menu"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full text-center bg-green-600 text-white font-bold py-2 rounded-lg hover:bg-green-700"
+                className="w-full text-center bg-green-600 text-white font-bold py-2 rounded-lg hover:bg-green-700 transform transition-transform duration-150 hover:scale-105 active:scale-95"
               >
                 🤖 Transaksi via BOT
               </a>
@@ -370,7 +367,7 @@ export default function Page() {
 
             <button
               onClick={() => setSelectedProduct(null)}
-              className="absolute top-2 right-3 text-white text-2xl hover:text-red-500"
+              className="absolute top-2 right-3 text-white text-2xl hover:text-red-500 transform transition-transform duration-150 hover:scale-110 active:scale-90"
             >
               &times;
             </button>
@@ -391,17 +388,6 @@ export default function Page() {
         }
         .animate-scaleFade {
           animation: scaleFade 0.25s ease-out forwards;
-        }
-        @keyframes spin-slow {
-          from {
-            transform: rotate(0deg);
-          }
-          to {
-            transform: rotate(360deg);
-          }
-        }
-        .animate-spin-slow {
-          animation: spin-slow 0.7s linear infinite;
         }
       `}</style>
     </main>
