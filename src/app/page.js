@@ -16,6 +16,9 @@ export default function Page() {
   const [searchArea, setSearchArea] = useState("");
   const [selectedProduct, setSelectedProduct] = useState(null);
 
+  // Popup state for Other Products stok
+  const [showOtherStock, setShowOtherStock] = useState(false);
+
   const fetchProducts = async () => {
     setLoadingProducts(true);
     try {
@@ -284,6 +287,16 @@ export default function Page() {
           {/* OTHER PRODUCTS */}
           {activeTab === "other" && (
             <section>
+              {/* tombol cek stok other products (popup) */}
+              <div className="flex justify-center mb-3">
+                <button
+                  onClick={() => setShowOtherStock(true)}
+                  className="px-5 py-2 bg-green-500 text-white rounded-full hover:bg-green-600 transition-colors shadow-md"
+                >
+                  🔄 Cek Stok Other Products
+                </button>
+              </div>
+
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {otherProductsState.map((p, i) => (
                   <div
@@ -310,6 +323,46 @@ export default function Page() {
                   </div>
                 ))}
               </div>
+
+              {/* POPUP STOK OTHER PRODUCTS */}
+              {showOtherStock && (
+                <div
+                  className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
+                  onClick={(e) => {
+                    if (e.target === e.currentTarget) setShowOtherStock(false);
+                  }}
+                >
+                  <div className="bg-gray-800 p-4 sm:p-6 rounded-2xl shadow-2xl w-full max-w-lg relative animate-scaleFade overflow-y-auto max-h-[80vh] text-white">
+                    <h2 className="text-xl font-bold mb-3 text-center">📦 Stok Other Products</h2>
+                    {otherProductsState.length === 0 ? (
+                      <p className="text-gray-300 text-center">Tidak ada data stok.</p>
+                    ) : (
+                      <div className="space-y-2">
+                        {otherProductsState.map((item, i) => (
+                          <div
+                            key={i}
+                            className="flex justify-between items-center bg-gray-700/50 hover:bg-gray-700 rounded-lg px-3 py-2 transition-all"
+                          >
+                            <div>
+                              <p className="font-semibold text-sm">{item.nama_produk}</p>
+                              <p className="text-gray-400 text-xs">{item.kode_produk}</p>
+                            </div>
+                            <span className="text-green-400 font-bold text-sm">
+                              {item.stok ? `${item.stok} unit` : "Tersedia"}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                    <button
+                      onClick={() => setShowOtherStock(false)}
+                      className="absolute top-2 right-3 text-2xl text-white hover:text-red-500"
+                    >
+                      &times;
+                    </button>
+                  </div>
+                </div>
+              )}
             </section>
           )}
         </div>
