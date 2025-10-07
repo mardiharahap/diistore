@@ -80,7 +80,7 @@ export default function Page() {
     const initial = otherProducts.map((p) => ({
       ...p,
       stok: p.nama_produk.toLowerCase().includes("bundling")
-        ? 3
+        ? 2
         : Math.floor(Math.random() * 2000) + 3000,
     }));
     setOtherProductsState(initial);
@@ -386,7 +386,7 @@ export default function Page() {
                             </div>
                             <span className="text-green-400 font-bold text-sm">
                               {item.nama_produk.toLowerCase().includes("bundling")
-                                ? "Tersedia (2)"
+                                ? "3 unit"
                                 : `${item.stok} unit`}
                             </span>
                           </div>
