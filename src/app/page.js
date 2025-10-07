@@ -1,4 +1,3 @@
-kontol full kode kayak gini
 "use client";
 import { useEffect, useState } from "react";
 import otherProducts from "../data/other_Products.json";
