@@ -161,12 +161,15 @@ export default function Page() {
           {/* STOCK */}
           {activeTab === "stock" && (
             <section>
-              <button
-                onClick={fetchStock}
-                className="mb-2 w-full sm:w-auto px-4 py-2 bg-green-500 text-white rounded-full hover:bg-green-600 transition-colors"
-              >
-                🔄 Refresh Stock
-              </button>
+              <div className="flex justify-center mb-2">
+  <button
+    onClick={fetchStock}
+    className="px-5 py-2 bg-green-500 text-white rounded-full hover:bg-green-600 transition-colors shadow-md"
+  >
+    🔄 Refresh Stock
+  </button>
+</div>
+
               <p className="text-yellow-400 text-xs sm:text-sm text-center mb-3">
                 ⚠️ Restok setiap jam 06:00 pagi
               </p>
@@ -226,12 +229,15 @@ export default function Page() {
                             : Number(p.harga_final) + 5000
                         ).toLocaleString("id-ID")}
                       </p>
-                      <button
-                        onClick={() => setSelectedProduct({ ...p, isOther: false })}
-                        className="mt-2 w-full bg-blue-500 py-2 rounded-lg font-semibold hover:bg-blue-600"
-                      >
-                        Beli
-                      </button>
+                      <div className="flex justify-end mt-3">
+  <button
+    onClick={() => setSelectedProduct({ ...p, isOther: false })}
+    className="px-3 py-1 bg-blue-500 text-white text-sm rounded-md hover:bg-blue-600 font-semibold shadow-sm"
+  >
+    Beli
+  </button>
+</div>
+
                     </div>
                   ))}
                 </div>
@@ -292,12 +298,15 @@ export default function Page() {
                     <p className="font-bold text-green-400 mt-2">
                       Rp {Number(p.harga_final).toLocaleString("id-ID")}
                     </p>
-                    <button
-                      onClick={() => setSelectedProduct({ ...p, isOther: true })}
-                      className="mt-2 w-full bg-blue-500 py-2 rounded-lg font-semibold hover:bg-blue-600"
-                    >
-                      Beli
-                    </button>
+                    <div className="flex justify-end mt-3">
+  <button
+    onClick={() => setSelectedProduct({ ...p, isOther: true })}
+    className="px-3 py-1 bg-blue-500 text-white text-sm rounded-md hover:bg-blue-600 font-semibold shadow-sm"
+  >
+    Beli
+  </button>
+</div>
+
                   </div>
                 ))}
               </div>
