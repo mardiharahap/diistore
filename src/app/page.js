@@ -74,11 +74,50 @@ export default function Page() {
     }
   };
 
+  // --- Random stock logic for other products ---
+  useEffect(() => {
+    // set stok acak awal 3000-5000
+    const initial = otherProducts.map((p) => ({
+      ...p,
+      stok: p.nama_produk.toLowerCase().includes("bundling")
+        ? 2
+        : Math.floor(Math.random() * 2000) + 3000,
+    }));
+    setOtherProductsState(initial);
+
+    // tiap menit kurangi acak 1-5
+    const decrease = setInterval(() => {
+      setOtherProductsState((prev) =>
+        prev.map((p) => {
+          if (p.nama_produk.toLowerCase().includes("bundling")) return p;
+          const reduce = Math.floor(Math.random() * 5) + 1;
+          const newStok = Math.max(0, p.stok - reduce);
+          return { ...p, stok: newStok };
+        })
+      );
+    }, 60000);
+
+    // tiap jam tambah stok acak lagi 100–1000
+    const increase = setInterval(() => {
+      setOtherProductsState((prev) =>
+        prev.map((p) => {
+          if (p.nama_produk.toLowerCase().includes("bundling")) return p;
+          const add = Math.floor(Math.random() * 900) + 100;
+          return { ...p, stok: p.stok + add };
+        })
+      );
+    }, 3600000);
+
+    return () => {
+      clearInterval(decrease);
+      clearInterval(increase);
+    };
+  }, []);
+
   useEffect(() => {
     fetchStock();
     fetchProducts();
     fetchAreaData();
-    setOtherProductsState(otherProducts);
   }, []);
 
   useEffect(() => {
@@ -159,20 +198,20 @@ export default function Page() {
           ))}
         </div>
 
-        {/* Content wrapper with scroll */}
+        {/* Content */}
         <div className="mt-4 overflow-y-auto max-h-[80vh] pr-1 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
+          
           {/* STOCK */}
           {activeTab === "stock" && (
             <section>
               <div className="flex justify-center mb-2">
-  <button
-    onClick={fetchStock}
-    className="px-5 py-2 bg-green-500 text-white rounded-full hover:bg-green-600 transition-colors shadow-md"
-  >
-    🔄 Refresh Stock
-  </button>
-</div>
-
+                <button
+                  onClick={fetchStock}
+                  className="px-5 py-2 bg-green-500 text-white rounded-full hover:bg-green-600 transition-colors shadow-md"
+                >
+                  🔄 Refresh Stock
+                </button>
+              </div>
               <p className="text-yellow-400 text-xs sm:text-sm text-center mb-3">
                 ⚠️ Restok setiap jam 06:00 pagi
               </p>
@@ -233,14 +272,13 @@ export default function Page() {
                         ).toLocaleString("id-ID")}
                       </p>
                       <div className="flex justify-end mt-3">
-  <button
-    onClick={() => setSelectedProduct({ ...p, isOther: false })}
-    className="px-3 py-1 bg-blue-500 text-white text-sm rounded-md hover:bg-blue-600 font-semibold shadow-sm"
-  >
-    Beli
-  </button>
-</div>
-
+                        <button
+                          onClick={() => setSelectedProduct({ ...p, isOther: false })}
+                          className="px-3 py-1 bg-blue-500 text-white text-sm rounded-md hover:bg-blue-600 font-semibold shadow-sm"
+                        >
+                          Beli
+                        </button>
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -312,14 +350,13 @@ export default function Page() {
                       Rp {Number(p.harga_final).toLocaleString("id-ID")}
                     </p>
                     <div className="flex justify-end mt-3">
-  <button
-    onClick={() => setSelectedProduct({ ...p, isOther: true })}
-    className="px-3 py-1 bg-blue-500 text-white text-sm rounded-md hover:bg-blue-600 font-semibold shadow-sm"
-  >
-    Beli
-  </button>
-</div>
-
+                      <button
+                        onClick={() => setSelectedProduct({ ...p, isOther: true })}
+                        className="px-3 py-1 bg-blue-500 text-white text-sm rounded-md hover:bg-blue-600 font-semibold shadow-sm"
+                      >
+                        Beli
+                      </button>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -348,7 +385,9 @@ export default function Page() {
                               <p className="text-gray-400 text-xs">{item.kode_produk}</p>
                             </div>
                             <span className="text-green-400 font-bold text-sm">
-                              {item.stok ? `${item.stok} unit` : "Tersedia"}
+                              {item.nama_produk.toLowerCase().includes("bundling")
+                                ? "Tersedia (2)"
+                                : `${item.stok} unit`}
                             </span>
                           </div>
                         ))}
