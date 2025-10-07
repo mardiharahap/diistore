@@ -80,7 +80,7 @@ export default function Page() {
     const initial = otherProducts.map((p) => ({
       ...p,
       stok: p.nama_produk.toLowerCase().includes("bundling")
-        ? 2
+        ? 3
         : Math.floor(Math.random() * 2000) + 3000,
     }));
     setOtherProductsState(initial);
