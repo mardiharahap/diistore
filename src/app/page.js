@@ -1,3 +1,4 @@
+kontol full kode kayak gini
 "use client";
 import { useEffect, useState } from "react";
 import otherProducts from "../data/other_Products.json";
@@ -15,6 +16,8 @@ export default function Page() {
   const [loadingArea, setLoadingArea] = useState(false);
   const [searchArea, setSearchArea] = useState("");
   const [selectedProduct, setSelectedProduct] = useState(null);
+
+  // Popup state for Other Products stok
   const [showOtherStock, setShowOtherStock] = useState(false);
 
   const fetchProducts = async () => {
@@ -72,7 +75,9 @@ export default function Page() {
     }
   };
 
+  // --- Random stock logic for other products ---
   useEffect(() => {
+    // set stok acak awal 3000-5000
     const initial = otherProducts.map((p) => ({
       ...p,
       stok: p.nama_produk.toLowerCase().includes("bundling")
@@ -81,6 +86,7 @@ export default function Page() {
     }));
     setOtherProductsState(initial);
 
+    // tiap menit kurangi acak 1-5
     const decrease = setInterval(() => {
       setOtherProductsState((prev) =>
         prev.map((p) => {
@@ -92,6 +98,7 @@ export default function Page() {
       );
     }, 60000);
 
+    // tiap jam tambah stok acak lagi 100–1000
     const increase = setInterval(() => {
       setOtherProductsState((prev) =>
         prev.map((p) => {
@@ -115,8 +122,9 @@ export default function Page() {
   }, []);
 
   useEffect(() => {
-    if (!searchArea) setFilteredArea(areaData);
-    else {
+    if (!searchArea) {
+      setFilteredArea(areaData);
+    } else {
       const lower = searchArea.toLowerCase();
       const filtered = areaData.filter(
         (a) =>
@@ -129,14 +137,14 @@ export default function Page() {
   }, [searchArea, areaData]);
 
   const getBgColor = (sisa) => {
-    if (sisa === 0) return "bg-red-100 border-red-300";
-    if (sisa < 50) return "bg-yellow-100 border-yellow-300";
-    return "bg-green-100 border-green-300";
+    if (sisa === 0) return "bg-red-600/30";
+    if (sisa < 50) return "bg-yellow-400/30";
+    return "bg-green-500/30";
   };
 
   const getBadgeColor = (sisa) => {
-    if (sisa === 0) return "bg-red-500";
-    if (sisa < 50) return "bg-yellow-400 text-black";
+    if (sisa === 0) return "bg-red-600";
+    if (sisa < 50) return "bg-yellow-500";
     return "bg-green-600";
   };
 
@@ -146,7 +154,7 @@ export default function Page() {
     const parts = text.split(regex);
     return parts.map((part, i) =>
       regex.test(part) ? (
-        <span key={i} className="bg-yellow-300 text-black px-1 rounded">
+        <span key={i} className="bg-yellow-400/70 text-black px-1 rounded">
           {part}
         </span>
       ) : (
@@ -158,18 +166,19 @@ export default function Page() {
   const randomPerak = () => Math.floor(Math.random() * 100) + 1;
 
   return (
-    <main className="p-3 sm:p-6 bg-gradient-to-br from-white to-blue-50 min-h-screen flex justify-center text-gray-800">
-      <div className="w-full max-w-5xl p-4 sm:p-6 rounded-3xl shadow-2xl bg-white border border-blue-100 relative">
+    <main className="p-2 sm:p-4 bg-gray-900 min-h-screen flex justify-center">
+      <div className="w-full max-w-4xl p-3 sm:p-6 rounded-3xl shadow-2xl bg-gradient-to-br from-gray-800 via-gray-700 to-gray-900 backdrop-blur-md relative">
+        
         {/* Header */}
         <div className="flex flex-col sm:flex-row items-center justify-center text-center mb-4">
-          <div className="w-14 h-14 sm:w-16 sm:h-16 relative rounded-full overflow-hidden mb-2 sm:mb-0 sm:mr-4 bg-blue-100 flex items-center justify-center">
+          <div className="w-14 h-14 sm:w-16 sm:h-16 relative rounded-full overflow-hidden mb-2 sm:mb-0 sm:mr-4">
             <Image src="/logo.png" alt="DIISTORE Logo" fill className="object-cover" />
           </div>
-          <h1 className="text-xl sm:text-3xl font-bold text-blue-700">DIISTORE Dashboard</h1>
+          <h1 className="text-xl sm:text-3xl font-bold text-white">DIISTORE Dashboard</h1>
         </div>
 
-        {/* Tabs */}
-        <div className="sticky top-0 z-50 w-full bg-blue-50/90 backdrop-blur-lg rounded-2xl py-2 px-3 flex flex-wrap justify-center gap-2 sm:gap-3 border border-blue-100 shadow-sm">
+        {/* Sticky Tabs */}
+        <div className="sticky top-0 z-50 w-full bg-gray-800/90 backdrop-blur-lg rounded-2xl py-2 px-2 flex flex-wrap justify-center gap-2 sm:gap-3 shadow-lg border border-gray-700">
           {[
             { key: "stock", label: "📊 Stok" },
             { key: "products", label: "🛒 Produk" },
@@ -181,8 +190,8 @@ export default function Page() {
               onClick={() => setActiveTab(tab.key)}
               className={`px-4 py-2 text-sm sm:text-base rounded-full font-semibold transition-all ${
                 activeTab === tab.key
-                  ? "bg-blue-600 text-white shadow-lg"
-                  : "bg-white text-blue-600 border border-blue-200 hover:bg-blue-100"
+                  ? "bg-blue-500 text-white shadow-lg"
+                  : "bg-gray-700 text-gray-200 hover:bg-gray-600"
               }`}
             >
               {tab.label}
@@ -190,24 +199,25 @@ export default function Page() {
           ))}
         </div>
 
-        {/* Konten */}
-        <div className="mt-4 overflow-y-auto max-h-[80vh] pr-1">
+        {/* Content */}
+        <div className="mt-4 overflow-y-auto max-h-[80vh] pr-1 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
+          
           {/* STOCK */}
           {activeTab === "stock" && (
             <section>
-              <div className="flex justify-center mb-3">
+              <div className="flex justify-center mb-2">
                 <button
                   onClick={fetchStock}
-                  className="px-5 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition shadow"
+                  className="px-5 py-2 bg-green-500 text-white rounded-full hover:bg-green-600 transition-colors shadow-md"
                 >
                   🔄 Refresh Stock
                 </button>
               </div>
-              <p className="text-blue-500 text-xs sm:text-sm text-center mb-3">
+              <p className="text-yellow-400 text-xs sm:text-sm text-center mb-3">
                 ⚠️ Restok setiap jam 06:00 pagi
               </p>
               {loadingStock ? (
-                <p className="text-center text-gray-500">Memuat stok...</p>
+                <p className="text-white text-center">Memuat stok...</p>
               ) : (
                 <div className="space-y-2">
                   {stock
@@ -215,13 +225,13 @@ export default function Page() {
                     .map((s, i) => (
                       <div
                         key={i}
-                        className={`flex justify-between items-center p-3 rounded-xl border ${getBgColor(
+                        className={`flex justify-between items-center p-2 sm:p-3 rounded-xl ${getBgColor(
                           s.sisa_slot
-                        )} hover:scale-[1.01] transition-transform`}
+                        )} hover:scale-[1.02] transition-transform`}
                       >
                         <div>
-                          <span className="font-semibold">{s.type}</span>
-                          <div className="text-gray-500 text-sm">{s.nama}</div>
+                          <span className="font-semibold text-white text-sm sm:text-base">{s.type}</span>
+                          <div className="text-gray-300 text-xs sm:text-sm">{s.nama}</div>
                         </div>
                         <span
                           className={`px-3 py-1 text-xs sm:text-sm rounded-full text-white font-semibold ${getBadgeColor(
@@ -241,20 +251,20 @@ export default function Page() {
           {activeTab === "products" && (
             <section>
               {loadingProducts ? (
-                <p className="text-center text-gray-500">Memuat produk...</p>
+                <p className="text-white text-center">Memuat produk...</p>
               ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {products.map((p, i) => (
                     <div
                       key={i}
-                      className="p-4 bg-blue-50 border border-blue-100 rounded-2xl shadow hover:shadow-md transition"
+                      className="p-3 sm:p-4 bg-gray-800 rounded-2xl shadow-md hover:shadow-xl transition-all text-white"
                     >
-                      <h3 className="font-bold text-blue-800">
+                      <h3 className="font-bold text-base sm:text-lg">
                         {p.nama_produk} ({p.kode_produk})
                       </h3>
-                      <p className="text-gray-500 text-sm">{p.kode_provider}</p>
-                      <p className="text-gray-600 text-sm mt-1">{p.deskripsi}</p>
-                      <p className="font-bold text-blue-700 mt-2">
+                      <p className="text-gray-400 text-xs sm:text-sm">{p.kode_provider}</p>
+                      <p className="text-gray-300 text-sm mt-1 whitespace-pre-line">{p.deskripsi}</p>
+                      <p className="font-bold text-green-400 mt-2">
                         Rp{" "}
                         {(
                           p.kode_produk === "BPAL1"
@@ -265,7 +275,7 @@ export default function Page() {
                       <div className="flex justify-end mt-3">
                         <button
                           onClick={() => setSelectedProduct({ ...p, isOther: false })}
-                          className="px-3 py-1 bg-blue-600 text-white rounded-md hover:bg-blue-700 font-semibold shadow-sm"
+                          className="px-3 py-1 bg-blue-500 text-white text-sm rounded-md hover:bg-blue-600 font-semibold shadow-sm"
                         >
                           Beli
                         </button>
@@ -285,30 +295,29 @@ export default function Page() {
                 value={searchArea}
                 onChange={(e) => setSearchArea(e.target.value)}
                 placeholder="Cari provinsi/kabupaten/area..."
-                className="w-full p-2 sm:p-3 rounded-xl mb-3 border border-blue-200"
+                className="w-full p-2 sm:p-3 rounded-xl mb-3 text-black"
               />
               {loadingArea ? (
-                <p className="text-center text-gray-500">Memuat area...</p>
+                <p className="text-white text-center">Memuat area...</p>
               ) : (
                 <div className="max-h-[400px] overflow-y-auto space-y-2">
                   {filteredArea.map((item, index) => (
                     <div
                       key={index}
-                      className="flex justify-between items-center p-2 bg-blue-50 border border-blue-100 rounded-lg text-sm"
+                      className="flex justify-between items-center p-2 bg-gray-700 rounded-lg text-white text-sm"
                     >
                       <div>
-                        <span className="font-semibold text-blue-800">
-                          {highlight(item.provinsi)}
-                        </span>
-                        <div className="text-gray-600 text-xs">
-                          {highlight(item.kabupaten)}
-                        </div>
+                        <span className="font-semibold">{highlight(item.provinsi)}</span>
+                        <div className="text-gray-300 text-xs">{highlight(item.kabupaten)}</div>
                       </div>
-                      <span className="px-2 py-1 bg-blue-600 text-white rounded-full text-xs sm:text-sm">
+                      <span className="px-2 py-1 bg-blue-600 rounded-full text-xs sm:text-sm">
                         {highlight(item.area)}
                       </span>
                     </div>
                   ))}
+                  {filteredArea.length === 0 && (
+                    <p className="text-gray-300 text-center">Tidak ada data ditemukan</p>
+                  )}
                 </div>
               )}
             </section>
@@ -317,10 +326,11 @@ export default function Page() {
           {/* OTHER PRODUCTS */}
           {activeTab === "other" && (
             <section>
+              {/* tombol cek stok other product (popup) */}
               <div className="flex justify-center mb-3">
                 <button
                   onClick={() => setShowOtherStock(true)}
-                  className="px-5 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 shadow transition"
+                  className="px-5 py-2 bg-green-500 text-white rounded-full hover:bg-green-600 transition-colors shadow-md"
                 >
                   🔄 Cek Stok
                 </button>
@@ -330,20 +340,20 @@ export default function Page() {
                 {otherProductsState.map((p, i) => (
                   <div
                     key={i}
-                    className="p-3 bg-blue-50 border border-blue-100 rounded-2xl shadow-sm hover:shadow-md transition"
+                    className="p-3 bg-gray-800 rounded-2xl shadow-md text-white hover:shadow-xl transition-all"
                   >
-                    <h3 className="font-bold text-blue-800">
+                    <h3 className="font-bold text-base sm:text-lg">
                       {p.nama_produk} ({p.kode_produk})
                     </h3>
-                    <p className="text-gray-500 text-xs sm:text-sm">{p.kode_provider}</p>
-                    <p className="text-gray-600 text-sm mt-1">{p.deskripsi}</p>
-                    <p className="font-bold text-blue-700 mt-2">
+                    <p className="text-gray-400 text-xs sm:text-sm">{p.kode_provider}</p>
+                    <p className="text-gray-300 text-sm mt-1 whitespace-pre-line">{p.deskripsi}</p>
+                    <p className="font-bold text-green-400 mt-2">
                       Rp {Number(p.harga_final).toLocaleString("id-ID")}
                     </p>
                     <div className="flex justify-end mt-3">
                       <button
                         onClick={() => setSelectedProduct({ ...p, isOther: true })}
-                        className="px-3 py-1 bg-blue-600 text-white text-sm rounded-md hover:bg-blue-700 font-semibold shadow-sm"
+                        className="px-3 py-1 bg-blue-500 text-white text-sm rounded-md hover:bg-blue-600 font-semibold shadow-sm"
                       >
                         Beli
                       </button>
@@ -351,20 +361,60 @@ export default function Page() {
                   </div>
                 ))}
               </div>
+
+              {/* POPUP STOK OTHER PRODUCTS */}
+              {showOtherStock && (
+                <div
+                  className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
+                  onClick={(e) => {
+                    if (e.target === e.currentTarget) setShowOtherStock(false);
+                  }}
+                >
+                  <div className="bg-gray-800 p-4 sm:p-6 rounded-2xl shadow-2xl w-full max-w-lg relative animate-scaleFade overflow-y-auto max-h-[80vh] text-white">
+                    <h2 className="text-xl font-bold mb-3 text-center">📦 Stok Lainnya</h2>
+                    {otherProductsState.length === 0 ? (
+                      <p className="text-gray-300 text-center">Tidak ada data stok.</p>
+                    ) : (
+                      <div className="space-y-2">
+                        {otherProductsState.map((item, i) => (
+                          <div
+                            key={i}
+                            className="flex justify-between items-center bg-gray-700/50 hover:bg-gray-700 rounded-lg px-3 py-2 transition-all"
+                          >
+                            <div>
+                              <p className="font-semibold text-sm">{item.nama_produk}</p>
+                              <p className="text-gray-400 text-xs">{item.kode_produk}</p>
+                            </div>
+                            <span className="text-green-400 font-bold text-sm">
+                              {item.nama_produk.toLowerCase().includes("bundling")
+                                ? "Tersedia (2)"
+                                : `${item.stok} unit`}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                    <button
+                      onClick={() => setShowOtherStock(false)}
+                      className="absolute top-2 right-3 text-2xl text-white hover:text-red-500"
+                    >
+                      &times;
+                    </button>
+                  </div>
+                </div>
+              )}
             </section>
           )}
         </div>
       </div>
 
-      {/* Modal beli */}
+      {/* MODAL */}
       {selectedProduct && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
-          <div className="bg-white p-5 rounded-2xl shadow-xl w-full max-w-sm border border-blue-100 animate-scaleFade relative">
-            <h2 className="text-lg font-bold text-blue-700 mb-2">
-              {selectedProduct.nama_produk}
-            </h2>
-            <p className="text-gray-600 text-sm mb-3">{selectedProduct.deskripsi}</p>
-            <p className="text-blue-600 font-bold text-lg mb-3">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4">
+          <div className="bg-gray-800 p-4 sm:p-6 rounded-2xl shadow-2xl w-full max-w-sm relative animate-scaleFade">
+            <h2 className="text-white text-lg font-bold mb-1">{selectedProduct.nama_produk}</h2>
+            <p className="text-gray-300 text-sm mb-2">{selectedProduct.deskripsi}</p>
+            <p className="text-green-400 font-bold text-lg mb-3">
               Rp{" "}
               {selectedProduct.isOther
                 ? Number(selectedProduct.harga_final).toLocaleString("id-ID")
@@ -373,12 +423,17 @@ export default function Page() {
                 : (Number(selectedProduct.harga_final) + 5000 + randomPerak()).toLocaleString("id-ID")}
             </p>
 
+            <p className="text-yellow-300 text-xs mb-3 leading-relaxed">
+              Transfer sesuai harga di atas agar admin tahu itu Anda. Setelah TF, hubungi admin.
+              <br />⚠️ Restok jam 06.00 pagi.
+            </p>
+
             <div className="flex flex-col items-center gap-2">
-              <Image src="/qr.png" alt="QRIS" width={180} height={180} className="rounded-xl border border-blue-200" />
+              <Image src="/qr.png" alt="QRIS" width={180} height={180} className="rounded-xl shadow-md" />
               <a
                 href="/qr.png"
                 download="QRIS_DIISTORE.png"
-                className="w-full text-center bg-blue-600 text-white font-bold py-2 rounded-lg hover:bg-blue-700"
+                className="w-full text-center bg-blue-500 text-white font-bold py-2 rounded-lg hover:bg-blue-600"
               >
                 📥 Download QRIS
               </a>
@@ -394,7 +449,7 @@ export default function Page() {
                 href="https://wa.me/6283867191746?text=menu"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full text-center bg-blue-500 text-white font-bold py-2 rounded-lg hover:bg-blue-600"
+                className="w-full text-center bg-green-600 text-white font-bold py-2 rounded-lg hover:bg-green-700"
               >
                 🤖 Transaksi via BOT
               </a>
@@ -402,7 +457,7 @@ export default function Page() {
 
             <button
               onClick={() => setSelectedProduct(null)}
-              className="absolute top-2 right-3 text-gray-400 text-2xl hover:text-blue-500"
+              className="absolute top-2 right-3 text-white text-2xl hover:text-red-500"
             >
               &times;
             </button>
@@ -412,11 +467,11 @@ export default function Page() {
 
       <style jsx>{`
         @keyframes scaleFade {
-          from {
-            transform: scale(0.95);
+          0% {
+            transform: scale(0.9);
             opacity: 0;
           }
-          to {
+          100% {
             transform: scale(1);
             opacity: 1;
           }
