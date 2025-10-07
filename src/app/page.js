@@ -325,13 +325,13 @@ export default function Page() {
           {/* OTHER PRODUCTS */}
           {activeTab === "other" && (
             <section>
-              {/* tombol cek stok other products (popup) */}
+              {/* tombol cek stok other product (popup) */}
               <div className="flex justify-center mb-3">
                 <button
                   onClick={() => setShowOtherStock(true)}
                   className="px-5 py-2 bg-green-500 text-white rounded-full hover:bg-green-600 transition-colors shadow-md"
                 >
-                  🔄 Cek Stok Other Products
+                  🔄 Cek Stok
                 </button>
               </div>
 
@@ -370,7 +370,7 @@ export default function Page() {
                   }}
                 >
                   <div className="bg-gray-800 p-4 sm:p-6 rounded-2xl shadow-2xl w-full max-w-lg relative animate-scaleFade overflow-y-auto max-h-[80vh] text-white">
-                    <h2 className="text-xl font-bold mb-3 text-center">📦 Stok Other Products</h2>
+                    <h2 className="text-xl font-bold mb-3 text-center">📦 Stok Lainnya</h2>
                     {otherProductsState.length === 0 ? (
                       <p className="text-gray-300 text-center">Tidak ada data stok.</p>
                     ) : (
