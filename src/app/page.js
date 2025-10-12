@@ -182,7 +182,7 @@ export default function Page() {
             { key: "stock", label: "📊 Stok" },
             { key: "products", label: "🛒 Produk" },
             { key: "area", label: "📍 Area" },
-            { key: "other", label: "📝 Lainnya" },
+            { key: "other", label: "📝 XL Only" },
           ].map((tab) => (
             <button
               key={tab.key}
