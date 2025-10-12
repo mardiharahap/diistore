@@ -77,14 +77,14 @@
         "harga_final": 15000
     },
   {
-    "nama_produk": "Apps TikTok (Rp 1,000)",
+    "nama_produk": "Apps TikTok",
     "kode_produk": "APP_TIK",
     "kode_provider": "XL",
     "deskripsi": "Harga:\n- Siapkan saldo ewalet/pulsa Rp: 25.000\n\nRincian Benefit:\n- Kuota TikTok : Unlimited\n- Expired : 30 Hari",
     "harga_final": 5000
   },
   {
-    "nama_produk": "Apps YouTube (Rp 1,000)",
+    "nama_produk": "Apps YouTube",
     "kode_produk": "APP_YT",
     "kode_provider": "XL",
     "deskripsi": "Harga:\n- Siapkan saldo ewalet/pulsa Rp: 25.000\n\nRincian Benefit:\n- Kuota YouTube : Unlimited\n- Expired : 30 Hari",
@@ -231,6 +231,7 @@
         "harga_final": 0
     }
 ]
+
 
 
 
