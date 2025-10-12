@@ -32,28 +32,28 @@
     "kode_produk": "FLEX_MLM75",
     "kode_provider": "XL",
     "deskripsi": "Harga:\n- Tidak ada pembayaran ke XL sama sekali\n\nNotes:\n- Beli Paket Flex dulu, bebas yang mana saja\n- Setelah sudah membeli semua persyaratan lanjut membeli paket (Bonus Flex)\n- Tidak bisa di timpa/akumulasi\n- Jika sudah habis bisa membeli lagi\n\nRincian Benefit:\n- Kuota Malam : 75 GB",
-    "harga_final": 
+    "harga_final": 15000
   },
   {
     "nama_produk": "Bonus Flex YouTube 50GB",
     "kode_produk": "FLEX_YT50",
     "kode_provider": "XL",
     "deskripsi": "Harga:\n- Tidak ada pembayaran ke XL sama sekali\n\nNotes:\n- Beli Paket Flex dulu, bebas yang mana saja\n- Setelah sudah membeli semua persyaratan lanjut membeli paket (Bonus Flex)\n- Tidak bisa di timpa/akumulasi\n- Jika sudah habis bisa membeli lagi\n\nRincian Benefit:\n- Kuota YouTube : 50 GB",
-    "harga_final": 
+    "harga_final": 15000
   },
   {
     "nama_produk": "Bonus Flex TikTok 50GB",
     "kode_produk": "FLEX_TIK50",
     "kode_provider": "XL",
     "deskripsi": "Harga:\n- Tidak ada pembayaran ke XL sama sekali\n\nNotes:\n- Beli Paket Flex dulu, bebas yang mana saja\n- Setelah sudah membeli semua persyaratan lanjut membeli paket (Bonus Flex)\n- Tidak bisa di timpa/akumulasi\n- Jika sudah habis bisa membeli lagi\n\nRincian Benefit:\n- Kuota TikTok : 50 GB",
-    "harga_final": 
+    "harga_final": 15000
   },
   {
     "nama_produk": "Bonus Flex Kuota Utama 25GB",
     "kode_produk": "FLEX_UTM25",
     "kode_provider": "XL",
     "deskripsi": "Harga:\n- Tidak ada pembayaran ke XL sama sekali\n\nNotes:\n- Beli Paket Flex dulu, bebas yang mana saja\n- Setelah sudah membeli semua persyaratan lanjut membeli paket (Bonus Flex)\n- Tidak bisa di timpa/akumulasi\n- Jika sudah habis bisa membeli lagi\n\nRincian Benefit:\n- Kuota Utama : 25 GB",
-    "harga_final": 
+    "harga_final": 15000
   },
     {
         "nama_produk": "Masa Aktif 1 Bulan",
@@ -217,6 +217,7 @@
         "harga_final": 0
     }
 ]
+
 
 
 
