@@ -1,4 +1,25 @@
 [
+  {
+    "nama_produk": "Kuota Reguler 22 GB",
+    "kode_produk": "REG22",
+    "kode_provider": "XL",
+    "deskripsi": "Rincian Benefit:\n- Kuota Pelanggan baru: 22 GB\n- masa aktif 1 bulan\n-mendapatkan masa aktif kartu 1 bulan ",
+    "harga_final": 20000
+  },
+  {
+    "nama_produk": "Kuota Reguler BPA 20-25 GB",
+    "kode_produk": "REG_BPA25",
+    "kode_provider": "XL",
+    "deskripsi": "Rincian Benefit:\n- Kuota Pribadi Nasional: 8 GB\n-Kuota Pribadi Lokal: 17 GB\n- masa aktif 1 bulan\n- mendapatkan masa aktif kartu 1 bulan ",
+    "harga_final": 22000
+  },
+  {
+    "nama_produk": "Kuota Reguler 30 GB",
+    "kode_produk": "REG30",
+    "kode_provider": "XL",
+    "deskripsi": "Rincian Benefit:\n- Kuota Pelanggan baru: 30 GB\n- masa aktif 1 bulan\n- mendapatkan masa aktif kartu 1 bulan",
+    "harga_final": 25000
+  },
    {
   "nama_produk": "Paket Bundling L1 (1 bulan)",
   "kode_produk": "BL1",
@@ -169,6 +190,7 @@
     }
 
 ]
+
 
 
 
