@@ -76,6 +76,20 @@
         "deskripsi": "-di usahakan nomor tidak dalam masa tenggang\n- jika sudah terlanjur masa tenggang belikan paket edukasi 2gb 1 hari = 1k, setelah beli bisa di coba beli masaaktif 1 tahun lagi\n- tidak langsung menambah masaaktif, stiap bulan dapat masaaktif 1 bulan sampe 1 tahun",
         "harga_final": 15000
     },
+  {
+    "nama_produk": "Apps TikTok (Rp 1,000)",
+    "kode_produk": "APP_TIK",
+    "kode_provider": "XL",
+    "deskripsi": "Harga:\n- Siapkan saldo ewalet/pulsa Rp: 25.000\n\nRincian Benefit:\n- Kuota TikTok : Unlimited\n- Expired : 30 Hari",
+    "harga_final": 5000
+  },
+  {
+    "nama_produk": "Apps YouTube (Rp 1,000)",
+    "kode_produk": "APP_YT",
+    "kode_provider": "XL",
+    "deskripsi": "Harga:\n- Siapkan saldo ewalet/pulsa Rp: 25.000\n\nRincian Benefit:\n- Kuota YouTube : Unlimited\n- Expired : 30 Hari",
+    "harga_final": 5000
+  },
     {
         "nama_produk": "Edukasi 15GB 7h",
         "kode_produk": "EDU15",
@@ -217,6 +231,7 @@
         "harga_final": 0
     }
 ]
+
 
 
 
