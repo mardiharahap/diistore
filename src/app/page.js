@@ -386,7 +386,7 @@ export default function Page() {
                             </div>
                             <span className="text-green-400 font-bold text-sm">
                               {item.nama_produk.toLowerCase().includes("bundling")
-                                ? "3 unit"
+                                ? "0 unit"
                                 : `${item.stok} unit`}
                             </span>
                           </div>
