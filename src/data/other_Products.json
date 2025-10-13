@@ -76,41 +76,6 @@
         "deskripsi": "-di usahakan nomor tidak dalam masa tenggang\n- jika sudah terlanjur masa tenggang belikan paket edukasi 2gb 1 hari = 1k, setelah beli bisa di coba beli masaaktif 1 tahun lagi\n- tidak langsung menambah masaaktif, stiap bulan dapat masaaktif 1 bulan sampe 1 tahun",
         "harga_final": 15000
     },
-  {
-    "nama_produk": "Apps TikTok",
-    "kode_produk": "APP_TIK",
-    "kode_provider": "XL",
-    "deskripsi": "Harga:\n- Siapkan saldo ewalet/pulsa Rp: 25.000\n\nRincian Benefit:\n- Kuota TikTok : Unlimited\n- Expired : 30 Hari",
-    "harga_final": 5000
-  },
-  {
-    "nama_produk": "Apps YouTube",
-    "kode_produk": "APP_YT",
-    "kode_provider": "XL",
-    "deskripsi": "Harga:\n- Siapkan saldo ewalet/pulsa Rp: 25.000\n\nRincian Benefit:\n- Kuota YouTube : Unlimited\n- Expired : 30 Hari",
-    "harga_final": 5000
-  },
-    {
-        "nama_produk": "Edukasi 15GB 7h",
-        "kode_produk": "EDU15",
-        "kode_provider": "XL",
-        "deskripsi": "- Paket internet edukasi 15GB\n- expired 7 Hari\n- Siapkan saldo ewalet/pulsa Rp: 7.500",
-        "harga_final": 4980
-    },
-    {
-        "nama_produk": "Edukasi 5GB 3h",
-        "kode_produk": "EDU5",
-        "kode_provider": "XL",
-        "deskripsi": "- Paket internet edukasi 5GB\n- expired 3 Hari\n- Siapkan saldo ewalet/pulsa Rp: 2.500",
-        "harga_final": 2980
-    },
-    {
-        "nama_produk": "Edukasi 2GB 1h",
-        "kode_produk": "EDU2",
-        "kode_provider": "XL",
-        "deskripsi": "- Paket internet edukasi 2GB\n- expired 1 Hari\n- Siapkan saldo ewalet/pulsa Rp: 1.000",
-        "harga_final": 989
-    },
     {
         "nama_produk": "Addon XCP Tiktok 5GB",
         "kode_produk": "XCP_TIK5",
@@ -231,6 +196,7 @@
         "harga_final": 0
     }
 ]
+
 
 
 
