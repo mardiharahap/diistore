@@ -10,29 +10,50 @@
   "nama_produk": "Kuota Reguler Xtra On 4GB + Mastif 1 Bulan",
   "kode_produk": "REG_XO4_M1",
   "kode_provider": "XL",
-  "deskripsi": "Harga:\n- Tidak ada pembayaran ke XL sama sekali\n\nRincian Benefit:\n- Kuota Utama : 4 GB\n- Masa aktif bisa di tumpuk\n- Kuota bisa di tumpuk",
-  "harga_final": 1500
+  "deskripsi": "Rincian Benefit:\n- Kuota Utama : 4 GB\n- Masa aktif bisa di tumpuk\n- Kuota bisa di tumpuk",
+  "harga_final": 7500
+},
+   {
+  "nama_produk": "Kuota Reguler 10 GB",
+  "kode_produk": "REG10",
+  "kode_provider": "XL",
+  "deskripsi": "Rincian Benefit:\n- Kuota Pelanggan baru: 10 GB\n- Masa aktif 1 bulan\n- Mendapatkan masa aktif kartu 1 bulan\n- Bisa di tumpuk dengan ( Kuota Reguler 30GB dan 22GB )",
+  "harga_final": 12000
 },
   {
     "nama_produk": "Kuota Reguler 22 GB",
     "kode_produk": "REG22",
     "kode_provider": "XL",
-    "deskripsi": "Rincian Benefit:\n- Kuota Pelanggan baru: 22 GB\n- masa aktif 1 bulan\n-mendapatkan masa aktif kartu 1 bulan ",
+    "deskripsi": "Rincian Benefit:\n- Kuota Pelanggan baru: 22 GB\n- masa aktif 1 bulan\n-mendapatkan masa aktif kartu 1 bulan\n- - Bisa di tumpuk sama ( Kuota Reguler 10 GB) ",
+    "harga_final": 20000
+  },
+   {
+  "nama_produk": "Kuota Reguler 30 GB",
+  "kode_produk": "REG30",
+  "kode_provider": "XL",
+  "deskripsi": "Rincian Benefit:\n- Kuota Pelanggan baru: 30 GB\n- Masa aktif 1 bulan\n- Mendapatkan masa aktif kartu 1 bulan\n- Bisa di tumpuk sama ( Kuota Reguler 10 GB",
+  "harga_final": 25000
+},
+  {
+    "nama_produk": "Kuota Bekasan L",
+    "kode_produk": "BEK_L",
+    "kode_provider": "XL",
+    "deskripsi": "Rincian Area:\n- Area 1 = 8 GB\n- Area 2 = 10 GB\n- Area 3 = 15 GB\n- Area 4 = 25 GB\nMasa aktif: 28-30 hari",
     "harga_final": 20000
   },
   {
-    "nama_produk": "Kuota Reguler BPA 20-25 GB",
-    "kode_produk": "REG_BPA25",
+    "nama_produk": "Kuota Bekasan XL",
+    "kode_produk": "BEK_XL",
     "kode_provider": "XL",
-    "deskripsi": "Rincian Benefit:\n- Kuota Pribadi Nasional: 8 GB\n-Kuota Pribadi Lokal: 17 GB\n- masa aktif 1 bulan\n- mendapatkan masa aktif kartu 1 bulan ",
-    "harga_final": 22000
+    "deskripsi": "Rincian Area:\n- Area 1 = 1.5 GB\n- Area 2 = 4.5 GB\n- Area 3 = 15 GB\n- Area 4 = 39 GB\nMasa aktif: 28-30 hari",
+    "harga_final": 25000
   },
   {
-    "nama_produk": "Kuota Reguler 30 GB",
-    "kode_produk": "REG30",
+    "nama_produk": "Kuota Bekasan XXL",
+    "kode_produk": "BEK_XXL",
     "kode_provider": "XL",
-    "deskripsi": "Rincian Benefit:\n- Kuota Pelanggan baru: 30 GB\n- masa aktif 1 bulan\n- mendapatkan masa aktif kartu 1 bulan",
-    "harga_final": 25000
+    "deskripsi": "Rincian Area:\n- Area 1 = 7.5 GB\n- Area 2 = 12 GB\n- Area 3 = 25 GB\n- Area 4 = 65 GB\nMasa aktif: 28-30 hari",
+    "harga_final": 30000
   },
   {
     "nama_produk": "Bonus Flex Kuota Malam 75GB",
@@ -42,26 +63,19 @@
     "harga_final": 15000
   },
   {
-    "nama_produk": "Bonus Flex YouTube 50GB",
-    "kode_produk": "FLEX_YT50",
-    "kode_provider": "XL",
-    "deskripsi": "Harga:\n- Tidak ada pembayaran ke XL sama sekali\n\nNotes:\n- Beli Paket Flex dulu, bebas yang mana saja\n- Setelah sudah membeli semua persyaratan lanjut membeli paket (Bonus Flex)\n- Tidak bisa di timpa/akumulasi\n- Jika sudah habis bisa membeli lagi\n\nRincian Benefit:\n- Kuota YouTube : 50 GB",
-    "harga_final": 15000
-  },
-  {
-    "nama_produk": "Bonus Flex TikTok 50GB",
-    "kode_produk": "FLEX_TIK50",
-    "kode_provider": "XL",
-    "deskripsi": "Harga:\n- Tidak ada pembayaran ke XL sama sekali\n\nNotes:\n- Beli Paket Flex dulu, bebas yang mana saja\n- Setelah sudah membeli semua persyaratan lanjut membeli paket (Bonus Flex)\n- Tidak bisa di timpa/akumulasi\n- Jika sudah habis bisa membeli lagi\n\nRincian Benefit:\n- Kuota TikTok : 50 GB",
-    "harga_final": 15000
-  },
-  {
-    "nama_produk": "Bonus Flex Kuota Utama 25GB",
-    "kode_produk": "FLEX_UTM25",
-    "kode_provider": "XL",
-    "deskripsi": "Harga:\n- Tidak ada pembayaran ke XL sama sekali\n\nNotes:\n- Beli Paket Flex dulu, bebas yang mana saja\n- Setelah sudah membeli semua persyaratan lanjut membeli paket (Bonus Flex)\n- Tidak bisa di timpa/akumulasi\n- Jika sudah habis bisa membeli lagi\n\nRincian Benefit:\n- Kuota Utama : 25 GB",
-    "harga_final": 15000
-  },
+  "nama_produk": "Bebas Puas YouTube & TikTok 54GB",
+  "kode_produk": "BP_YT_TIK54",
+  "kode_provider": "XL",
+  "deskripsi": "Rincian Benefit:\n- Kuota YouTube & TikTok : 54 GB",
+  "harga_final": 2000
+},
+   {
+  "nama_produk": "Bebas Puas Kuota Utama 45 GB",
+  "kode_produk": "BP_UTM45",
+  "kode_provider": "XL",
+  "deskripsi": "Rincian Benefit:\n- Kuota Utama : 45 GB",
+  "harga_final": 2000
+},
     {
         "nama_produk": "Masa Aktif 1 Bulan",
         "kode_produk": "MA1B",
@@ -189,6 +203,7 @@
         "harga_final": 3000
     }
 ]
+
 
 
 
