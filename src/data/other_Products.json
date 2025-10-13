@@ -60,14 +60,14 @@
     "kode_produk": "BPYT54",
     "provider": "XL",
     "deskripsi": "Rincian Benefit:\n- Kuota YouTube & TikTok: 54 GB\n-bonus kuota reguler 10GB\n-bisa tumpuk",
-    "harga_final": 20000
+    "harga_final": 18000
   },
   {
     "nama_produk": "Bebas Puas Kuota Utama 45GB",
     "kode_produk": "BPUTM45",
     "provider": "XL",
     "deskripsi": "Rincian Benefit:\n- Kuota Utama: 45 GB\n-bonus kuota reguler 10GB\n-bisa tumpuk",
-    "harga_final": 30000
+    "harga_final": 25000
   },
   {
     "nama_produk": "Masa Aktif 1 Bulan",
@@ -196,4 +196,5 @@
     "harga_final": 3000
   }
 ]
+
 
