@@ -56,25 +56,18 @@
     "harga_final": 30000
   },
   {
-    "nama_produk": "Bonus Flex Malam 75GB",
-    "kode_produk": "FMLM75",
-    "provider": "XL",
-    "deskripsi": "Rincian Benefit:\n- Kuota Malam: 75 GB",
-    "harga_final": 15000
-  },
-  {
     "nama_produk": "Bebas Puas YouTube & TikTok 54GB",
     "kode_produk": "BPYT54",
     "provider": "XL",
-    "deskripsi": "Rincian Benefit:\n- Kuota YouTube & TikTok: 54 GB",
-    "harga_final": 2000
+    "deskripsi": "Rincian Benefit:\n- Kuota YouTube & TikTok: 54 GB\n-bonus kuota reguler 10GB\n-bisa tumpuk",
+    "harga_final": 20000
   },
   {
     "nama_produk": "Bebas Puas Kuota Utama 45GB",
     "kode_produk": "BPUTM45",
     "provider": "XL",
-    "deskripsi": "Rincian Benefit:\n- Kuota Utama: 45 GB",
-    "harga_final": 2000
+    "deskripsi": "Rincian Benefit:\n- Kuota Utama: 45 GB\n-bonus kuota reguler 10GB\n-bisa tumpuk",
+    "harga_final": 30000
   },
   {
     "nama_produk": "Masa Aktif 1 Bulan",
@@ -203,3 +196,4 @@
     "harga_final": 3000
   }
 ]
+
