@@ -4,195 +4,202 @@
     "kode_produk": "BL1",
     "provider": "XL, Axis",
     "deskripsi": "Open Paket Bundling L1 selama 30 hari.\nRincian Area:\n- Area 1: 8 GB/hari\n- Area 2: 10 GB/hari\n- Area 3: 15 GB/hari\n- Area 4: 25 GB/hari\nCatatan: Official, Resmi, Bergaransi",
-    "harga": 49000
+    "harga_final": 49000
   },
   {
     "nama_produk": "Kuota Xtra On 4GB + Mastif 1 Bulan",
     "kode_produk": "XO4M1",
     "provider": "XL",
     "deskripsi": "Rincian Benefit:\n- Kuota Utama: 4 GB\n- Masa aktif & kuota bisa ditumpuk",
-    "harga": 7500
+    "harga_final": 7500
   },
   {
     "nama_produk": "Kuota Reguler 10GB",
     "kode_produk": "R10",
     "provider": "XL",
     "deskripsi": "Rincian Benefit:\n- Kuota Pelanggan baru: 10 GB\n- Masa aktif 1 bulan\n- Bisa ditumpuk dengan Kuota Reguler 22GB & 30GB",
-    "harga": 12000
+    "harga_final": 12000
   },
   {
     "nama_produk": "Kuota Reguler 22GB",
     "kode_produk": "R22",
     "provider": "XL",
     "deskripsi": "Rincian Benefit:\n- Kuota Pelanggan baru: 22 GB\n- Masa aktif 1 bulan\n- Bisa ditumpuk dengan Kuota Reguler 10GB",
-    "harga": 20000
+    "harga_final": 20000
   },
   {
     "nama_produk": "Kuota Reguler 30GB",
     "kode_produk": "R30",
     "provider": "XL",
     "deskripsi": "Rincian Benefit:\n- Kuota Pelanggan baru: 30 GB\n- Masa aktif 1 bulan\n- Bisa ditumpuk dengan Kuota Reguler 10GB",
-    "harga": 25000
+    "harga_final": 25000
   },
   {
     "nama_produk": "Kuota Bekasan L",
     "kode_produk": "BL",
     "provider": "XL",
     "deskripsi": "Rincian Area:\n- Area 1: 8 GB\n- Area 2: 10 GB\n- Area 3: 15 GB\n- Area 4: 25 GB\nMasa aktif: 28-30 hari",
-    "harga": 20000
+    "harga_final": 20000
   },
   {
     "nama_produk": "Kuota Bekasan XL",
     "kode_produk": "BXL",
     "provider": "XL",
     "deskripsi": "Rincian Area:\n- Area 1: 1.5 GB\n- Area 2: 4.5 GB\n- Area 3: 15 GB\n- Area 4: 39 GB\nMasa aktif: 28-30 hari",
-    "harga": 25000
+    "harga_final": 25000
   },
   {
     "nama_produk": "Kuota Bekasan XXL",
     "kode_produk": "BXXL",
     "provider": "XL",
     "deskripsi": "Rincian Area:\n- Area 1: 7.5 GB\n- Area 2: 12 GB\n- Area 3: 25 GB\n- Area 4: 65 GB\nMasa aktif: 28-30 hari",
-    "harga": 30000
+    "harga_final": 30000
+  },
+  {
+    "nama_produk": "Bonus Flex Malam 75GB",
+    "kode_produk": "FMLM75",
+    "provider": "XL",
+    "deskripsi": "Rincian Benefit:\n- Kuota Malam: 75 GB",
+    "harga_final": 15000
   },
   {
     "nama_produk": "Bebas Puas YouTube & TikTok 54GB",
     "kode_produk": "BPYT54",
     "provider": "XL",
     "deskripsi": "Rincian Benefit:\n- Kuota YouTube & TikTok: 54 GB",
-    "harga": 2000
+    "harga_final": 2000
   },
   {
     "nama_produk": "Bebas Puas Kuota Utama 45GB",
     "kode_produk": "BPUTM45",
     "provider": "XL",
     "deskripsi": "Rincian Benefit:\n- Kuota Utama: 45 GB",
-    "harga": 2000
+    "harga_final": 2000
   },
   {
     "nama_produk": "Masa Aktif 1 Bulan",
     "kode_produk": "MA1B",
     "provider": "XL",
     "deskripsi": "Langsung mendapatkan masa aktif 1 bulan. Tidak bisa ditumpuk.",
-    "harga": 4500
+    "harga_final": 4500
   },
   {
     "nama_produk": "Masa Aktif 45 Hari",
     "kode_produk": "MA45",
     "provider": "XL",
     "deskripsi": "Langsung mendapatkan masa aktif 45 hari. Tidak bisa ditumpuk.",
-    "harga": 6000
+    "harga_final": 6000
   },
   {
     "nama_produk": "Masa Aktif 1 Tahun",
     "kode_produk": "MA1T",
     "provider": "XL",
     "deskripsi": "Masa aktif bertahap: tiap bulan bertambah 1 bulan sampai 1 tahun. Usahakan nomor tidak dalam masa tenggang.",
-    "harga": 15000
+    "harga_final": 15000
   },
   {
     "nama_produk": "Addon XCP Tiktok 5GB",
     "kode_produk": "AXT5",
     "provider": "XL",
     "deskripsi": "Kuota Tiktok 5GB, mengikuti masa aktif XCP/XCV.",
-    "harga": 1500
+    "harga_final": 1500
   },
   {
     "nama_produk": "Addon XCP YouTube 5GB",
     "kode_produk": "AXYT5",
     "provider": "XL",
     "deskripsi": "Kuota YouTube 5GB, mengikuti masa aktif XCP/XCV.",
-    "harga": 1500
+    "harga_final": 1500
   },
   {
     "nama_produk": "Addon XCP Facebook 5GB",
     "kode_produk": "AXFB5",
     "provider": "XL",
     "deskripsi": "Kuota Facebook 5GB, mengikuti masa aktif XCP/XCV.",
-    "harga": 1500
+    "harga_final": 1500
   },
   {
     "nama_produk": "Addon XCP Instagram 5GB",
     "kode_produk": "AXIG5",
     "provider": "XL",
     "deskripsi": "Kuota Instagram 5GB, mengikuti masa aktif XCP/XCV.",
-    "harga": 1500
+    "harga_final": 1500
   },
   {
     "nama_produk": "Addon XCP WhatsApp 5GB",
     "kode_produk": "AXWA5",
     "provider": "XL",
     "deskripsi": "Kuota WhatsApp 5GB, mengikuti masa aktif XCP/XCV.",
-    "harga": 1500
+    "harga_final": 1500
   },
   {
     "nama_produk": "Addon XCP Streaming 5GB",
     "kode_produk": "AXSTR5",
     "provider": "XL",
     "deskripsi": "Kuota Streaming 5GB, mengikuti masa aktif XCP/XCV.",
-    "harga": 1500
+    "harga_final": 1500
   },
   {
     "nama_produk": "Addon XCP Social Media 5GB",
     "kode_produk": "AXSM5",
     "provider": "XL",
     "deskripsi": "Kuota Social Media 5GB, mengikuti masa aktif XCP/XCV.",
-    "harga": 1500
+    "harga_final": 1500
   },
   {
     "nama_produk": "Addon XCP Game 5GB",
-    "kode_produk": "AXGM5",
+    "kode_produk": "AXG5",
     "provider": "XL",
     "deskripsi": "Kuota Game 5GB, mengikuti masa aktif XCP/XCV.",
-    "harga": 1500
+    "harga_final": 1500
   },
   {
     "nama_produk": "Addon XCP Tiktok 15GB",
     "kode_produk": "AXT15",
     "provider": "XL",
     "deskripsi": "Kuota Tiktok 15GB, mengikuti masa aktif XCP/XCV.",
-    "harga": 3000
+    "harga_final": 3000
   },
   {
     "nama_produk": "Addon XCP YouTube 15GB",
     "kode_produk": "AXYT15",
     "provider": "XL",
     "deskripsi": "Kuota YouTube 15GB, mengikuti masa aktif XCP/XCV.",
-    "harga": 3000
+    "harga_final": 3000
   },
   {
     "nama_produk": "Addon XCP Facebook 15GB",
     "kode_produk": "AXFB15",
     "provider": "XL",
     "deskripsi": "Kuota Facebook 15GB, mengikuti masa aktif XCP/XCV.",
-    "harga": 3000
+    "harga_final": 3000
   },
   {
     "nama_produk": "Addon XCP Instagram 15GB",
     "kode_produk": "AXIG15",
     "provider": "XL",
     "deskripsi": "Kuota Instagram 15GB, mengikuti masa aktif XCP/XCV.",
-    "harga": 3000
+    "harga_final": 3000
   },
   {
     "nama_produk": "Addon XCP WhatsApp 15GB",
     "kode_produk": "AXWA15",
     "provider": "XL",
     "deskripsi": "Kuota WhatsApp 15GB, mengikuti masa aktif XCP/XCV.",
-    "harga": 3000
+    "harga_final": 3000
   },
   {
     "nama_produk": "Addon XCP Social Media 15GB",
     "kode_produk": "AXSM15",
     "provider": "XL",
     "deskripsi": "Kuota Social Media 15GB, mengikuti masa aktif XCP/XCV.",
-    "harga": 3000
+    "harga_final": 3000
   },
   {
     "nama_produk": "Addon XCP Game 15GB",
-    "kode_produk": "AXGM15",
+    "kode_produk": "AXG15",
     "provider": "XL",
     "deskripsi": "Kuota Game 15GB, mengikuti masa aktif XCP/XCV.",
-    "harga": 3000
+    "harga_final": 3000
   }
 ]
