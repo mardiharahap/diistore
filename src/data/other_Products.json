@@ -1,1 +1,83 @@
-[]
+[
+    {
+      "nama_produk": "XL BEBAS PUAS V1",
+      "kode_produk": "BPV1",
+      "kode_provider": "XL",
+      "harga_final": 97055,
+      "deskripsi": "Kuota Area 1 = 75GB\nArea 2 = 81GB\nArea 3 = 84GB\nArea 4 = 90GB\n\n📍BONUS:\n6GB Kuota Utama\n9GB Kuota YouTube & TikTok\n15GB Kuota Malam (00.00–06.00)\n\n📌 Bonus hanya bisa di-claim 1 macam via aplikasi MyXL / *848#\n📌 Masa aktif 30 hari\n📌 Kuota bisa akumulasi (tanpa unreg)\n📌 Kuota bulan lalu tidak hangus jika diperpanjang.",
+      "syarat": "Nomor pembeli wajib aktif dan terbaca sinyal lokal (BTS lokal). Jika kartu tidak dipasang/dinonaktifkan, kuota lokal tidak masuk.",
+      "stok": 12,
+      "status": "open"
+    },
+    {
+      "nama_produk": "XL BEBAS PUAS V2",
+      "kode_produk": "BPV2",
+      "kode_provider": "XL",
+      "harga_final": 159950,
+      "deskripsi": "Kuota Area 1 = 234GB\nArea 2 = 240GB\nArea 3 = 255GB\nArea 4 = 270GB\n\n📍BONUS:\n15GB Kuota Utama\n30GB Kuota YouTube & TikTok\n36GB Kuota Malam (00.00–06.00)\n\n📌 Bonus hanya bisa di-claim 1 macam via aplikasi MyXL / *848#\n📌 Masa aktif 30 hari\n📌 Kuota bisa akumulasi (tanpa unreg)\n📌 Kuota bulan lalu tidak hangus jika diperpanjang.",
+      "syarat": "Nomor pembeli wajib aktif dan terbaca sinyal lokal (BTS lokal). Jika kartu tidak dipasang/dinonaktifkan, kuota lokal tidak masuk.",
+      "stok": 8,
+      "status": "open"
+    },
+    {
+      "nama_produk": "XL Data Bebas Puas 7,5GB (3 Hari)",
+      "kode_produk": "TRP1",
+      "kode_provider": "XL",
+      "harga_final": 12315,
+      "deskripsi": "Kuota utama 7,5GB berlaku 3 hari.\nKhusus area Jawa Timur & Jawa Tengah (kecuali Madura).\n\n📌 Tidak berlaku untuk area berikut:\nMadura, Kab. Grobogan, Kab. Magelang, Kab. Purbalingga, Kab. Temanggung, Kota Magelang, Kab. Blitar, Kota Blitar.",
+      "syarat": "Jika nomor tidak berada di area Jawa Tengah/Jawa Timur, triple kuota tidak akan masuk.",
+      "stok": 15,
+      "status": "open"
+    },
+    {
+      "nama_produk": "XL Data Bebas Puas 12,5GB (5 Hari)",
+      "kode_produk": "TRP2",
+      "kode_provider": "XL",
+      "harga_final": 18230,
+      "deskripsi": "Kuota utama 12,5GB berlaku 5 hari.\nKhusus area Jawa Timur & Jawa Tengah (kecuali Madura).\n\n📌 Tidak berlaku untuk area berikut:\nMadura, Kab. Grobogan, Kab. Magelang, Kab. Purbalingga, Kab. Temanggung, Kota Magelang, Kab. Blitar, Kota Blitar.",
+      "syarat": "Jika nomor tidak berada di area Jawa Tengah/Jawa Timur, triple kuota tidak akan masuk.",
+      "stok": 10,
+      "status": "open"
+    },
+    {
+      "nama_produk": "XL Data Bebas Puas 17,5GB (7 Hari)",
+      "kode_produk": "TRP3",
+      "kode_provider": "XL",
+      "harga_final": 23885,
+      "deskripsi": "Kuota utama 17,5GB berlaku 7 hari.\nKhusus area Jawa Timur & Jawa Tengah (kecuali Madura).\n\n📌 Tidak berlaku untuk area berikut:\nMadura, Kab. Grobogan, Kab. Magelang, Kab. Purbalingga, Kab. Temanggung, Kota Magelang, Kab. Blitar, Kota Blitar.",
+      "syarat": "Jika nomor tidak berada di area Jawa Tengah/Jawa Timur, triple kuota tidak akan masuk.",
+      "stok": 6,
+      "status": "open"
+    },
+    {
+      "nama_produk": "XL Masa Aktif 30 Hari",
+      "kode_produk": "MA30",
+      "kode_provider": "XL",
+      "harga_final": 4500,
+      "deskripsi": "Perpanjang masa aktif 30 hari.\nHanya untuk nomor aktif (OTP 1x).",
+      "syarat": "Tidak boleh dalam masa tenggang.",
+      "stok": 20,
+      "status": "open"
+    },
+    {
+      "nama_produk": "XL Masa Aktif 45 Hari",
+      "kode_produk": "MA45",
+      "kode_provider": "XL",
+      "harga_final": 6000,
+      "deskripsi": "Perpanjang masa aktif 45 hari.\nHanya untuk nomor aktif (OTP 1x).",
+      "syarat": "Tidak boleh dalam masa tenggang.",
+      "stok": 18,
+      "status": "open"
+    },
+    {
+      "nama_produk": "XL Masa Aktif 1 Tahun",
+      "kode_produk": "MA365",
+      "kode_provider": "XL",
+      "harga_final": 15000,
+      "deskripsi": "Menambah masa aktif selama 1 tahun.\nTidak langsung 12 bulan, setiap bulan bertambah 1 bulan.\nHanya untuk nomor aktif (OTP 1x).",
+      "syarat": "Tidak boleh dalam masa tenggang.",
+      "stok": 10,
+      "status": "open"
+    }
+]
+
