@@ -423,77 +423,89 @@ export default function Page() {
       </div>
 
       {/* MODAL */}
-      {selectedProduct && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4">
-          <div className="bg-gray-800 p-4 sm:p-6 rounded-2xl shadow-2xl w-full max-w-sm relative animate-scaleFade">
-            <h2 className="text-white text-lg font-bold mb-1">{selectedProduct.nama_produk}</h2>
-            <p className="text-gray-300 text-sm mb-2">{selectedProduct.deskripsi}</p>
-            <p className="text-green-400 font-bold text-lg mb-3">
-              Rp{" "}
-              {selectedProduct.isOther
-                ? Number(selectedProduct.harga_final).toLocaleString("id-ID")
-                : selectedProduct.kode_produk === "BPAL1"
-                ? (Number(selectedProduct.harga_final) + 3000 + randomPerak()).toLocaleString("id-ID")
-                : (Number(selectedProduct.harga_final) + 5000 + randomPerak()).toLocaleString("id-ID")}
-            </p>
+{selectedProduct && (
+  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4">
+    <div className="bg-gray-800 p-4 sm:p-6 rounded-2xl shadow-2xl w-full max-w-sm relative animate-scaleFade">
+      {/* Judul Produk */}
+      <h2 className="text-white text-lg font-bold mb-1">{selectedProduct.nama_produk}</h2>
+      <p className="text-gray-300 text-sm mb-2">{selectedProduct.deskripsi}</p>
 
-            <p className="text-yellow-300 text-xs mb-3 leading-relaxed">
-              Transfer sesuai harga di atas agar admin tahu itu Anda. Setelah TF, hubungi admin.
-              <br />⚠️ Restok jam 06.00 pagi.
-            </p>
+      {/* Harga Produk */}
+      <p className="text-green-400 font-bold text-lg mb-3">
+        Rp {Number(selectedProduct.harga_final).toLocaleString("id-ID")}
+      </p>
 
-            <div className="flex flex-col items-center gap-2">
-              <Image src="/qr.png" alt="QRIS" width={180} height={180} className="rounded-xl shadow-md" />
-              <a
-                href="/qr.png"
-                download="QRIS_DIISTORE.png"
-                className="w-full text-center bg-blue-500 text-white font-bold py-2 rounded-lg hover:bg-blue-600"
-              >
-                📥 Download QRIS
-              </a>
-              <a
-                href="https://wa.me/6283863622087"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full text-center bg-green-500 text-white font-bold py-2 rounded-lg hover:bg-green-600"
-              >
-                💬 Hubungi Admin
-              </a>
-              <a
-                href="https://wa.me/6283867191746?text=menu"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full text-center bg-green-600 text-white font-bold py-2 rounded-lg hover:bg-green-700"
-              >
-                🤖 Transaksi via BOT
-              </a>
-            </div>
+      {/* Catatan / Keterangan */}
+      <p className="text-yellow-300 text-xs mb-3 leading-relaxed">
+        Transfer sesuai harga di atas agar admin tahu itu Anda.
+        Setelah transfer, hubungi admin.
+        <br />⚠️ Restok jam 06.00 pagi.
+      </p>
 
-            <button
-              onClick={() => setSelectedProduct(null)}
-              className="absolute top-2 right-3 text-white text-2xl hover:text-red-500"
-            >
-              &times;
-            </button>
-          </div>
-        </div>
-      )}
+      {/* QRIS + Tombol Aksi */}
+      <div className="flex flex-col items-center gap-2">
+        <Image
+          src="/qr.png"
+          alt="QRIS"
+          width={180}
+          height={180}
+          className="rounded-xl shadow-md"
+        />
 
-      <style jsx>{`
-        @keyframes scaleFade {
-          0% {
-            transform: scale(0.9);
-            opacity: 0;
-          }
-          100% {
-            transform: scale(1);
-            opacity: 1;
-          }
-        }
-        .animate-scaleFade {
-          animation: scaleFade 0.25s ease-out forwards;
-        }
-      `}</style>
+        <a
+          href="/qr.png"
+          download="QRIS_DIISTORE.png"
+          className="w-full text-center bg-blue-500 text-white font-bold py-2 rounded-lg hover:bg-blue-600"
+        >
+          📥 Download QRIS
+        </a>
+
+        <a
+          href="https://wa.me/6283863622087"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-full text-center bg-green-500 text-white font-bold py-2 rounded-lg hover:bg-green-600"
+        >
+          💬 Hubungi Admin
+        </a>
+
+        <a
+          href="https://wa.me/6283867191746?text=menu"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-full text-center bg-green-600 text-white font-bold py-2 rounded-lg hover:bg-green-700"
+        >
+          🤖 Transaksi via BOT
+        </a>
+      </div>
+
+      {/* Tombol Tutup */}
+      <button
+        onClick={() => setSelectedProduct(null)}
+        className="absolute top-2 right-3 text-white text-2xl hover:text-red-500"
+      >
+        &times;
+      </button>
+    </div>
+  </div>
+)}
+
+<style jsx>{`
+  @keyframes scaleFade {
+    0% {
+      transform: scale(0.9);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  .animate-scaleFade {
+    animation: scaleFade 0.25s ease-out forwards;
+  }
+`}</style>
+
     </main>
   );
 }
