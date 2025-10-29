@@ -283,12 +283,19 @@ export default function Page() {
                   Rp {hargaFinal.toLocaleString("id-ID")}
                 </p>
                 <div className="flex justify-end mt-3">
-                  <button
-                    onClick={() => setSelectedProduct({ ...p, isOther: false })}
-                    className="px-3 py-1 bg-blue-500 text-white text-sm rounded-md hover:bg-blue-600 font-semibold shadow-sm"
-                  >
-                    Beli
-                  </button>
+                 <button
+  onClick={() =>
+    setSelectedProduct({
+      ...p,
+      isOther: false,
+      harga_final: Number(p.harga_final) + hargaTambahan, // ✅ kirim harga yang sudah disesuaikan
+    })
+  }
+  className="px-3 py-1 bg-blue-500 text-white text-sm rounded-md hover:bg-blue-600 font-semibold shadow-sm"
+>
+  Beli
+</button>
+
                 </div>
               </div>
             );
@@ -444,13 +451,7 @@ export default function Page() {
 
       {/* QRIS + Tombol Aksi */}
       <div className="flex flex-col items-center gap-2">
-        <Image
-          src="/qr.png"
-          alt="QRIS"
-          width={180}
-          height={180}
-          className="rounded-xl shadow-md"
-        />
+        <Image src="/qr.png" alt="QRIS" width={180} height={180} className="rounded-xl shadow-md" />
 
         <a
           href="/qr.png"
@@ -505,6 +506,7 @@ export default function Page() {
     animation: scaleFade 0.25s ease-out forwards;
   }
 `}</style>
+
 
     </main>
   );
