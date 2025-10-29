@@ -421,7 +421,6 @@ export default function Page() {
           )}
         </div>
       </div>
-ini sudah tidak ada produk nya tolong buat kan tampilan nya semua sedang close silahkan tunggu untuk update produk berikutnya
 
       {/* MODAL */}
       {selectedProduct && (
