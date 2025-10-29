@@ -255,7 +255,7 @@ export default function Page() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {products
           // 🔹 Filter: hapus produk dengan kode BPAL
-          .filter(p => !p.kode_produk?.startsWith("BPAL"))
+          .filter(p => !p.kode_produk?.startsWith("BPA"))
           .map((p, i) => {
             let hargaTambahan = 0;
 
