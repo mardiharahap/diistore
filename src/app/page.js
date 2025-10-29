@@ -337,108 +337,91 @@ export default function Page() {
             </section>
           )}
 
-          {/* OTHER PRODUCTS */}
-{activeTab === "other" && (
-  <section>
-    {/* tombol cek stok other product (popup) */}
-    <div className="flex justify-center mb-3">
-      <button
-        onClick={() => setShowOtherStock(true)}
-        className="px-5 py-2 bg-green-500 text-white rounded-full hover:bg-green-600 transition-colors shadow-md"
-      >
-        🔄 Cek Stok
-      </button>
-    </div>
-
-    {/* Jika tidak ada produk */}
-    {otherProductsState.length === 0 ? (
-      <div className="flex flex-col items-center justify-center text-center py-10">
-        <div className="text-6xl mb-3">🕒</div>
-        <h2 className="text-xl sm:text-2xl font-bold text-white">
-          Semua produk sedang <span className="text-red-400">CLOSE</span>
-        </h2>
-        <p className="text-gray-400 mt-2 text-sm sm:text-base">
-          Silakan tunggu untuk update produk berikutnya.
-        </p>
-      </div>
-    ) : (
-      <>
-        {/* List produk */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          {otherProductsState.map((p, i) => (
-            <div
-              key={i}
-              className="p-3 bg-gray-800 rounded-2xl shadow-md text-white hover:shadow-xl transition-all"
-            >
-              <h3 className="font-bold text-base sm:text-lg">
-                {p.nama_produk} ({p.kode_produk})
-              </h3>
-              <p className="text-gray-400 text-xs sm:text-sm">{p.kode_provider}</p>
-              <p className="text-gray-300 text-sm mt-1 whitespace-pre-line">{p.deskripsi}</p>
-              <p className="font-bold text-green-400 mt-2">
-                Rp {Number(p.harga_final).toLocaleString("id-ID")}
-              </p>
-              <div className="flex justify-end mt-3">
+         {/* OTHER PRODUCTS */}
+          {activeTab === "other" && (
+            <section>
+              {/* tombol cek stok other product (popup) */}
+              <div className="flex justify-center mb-3">
                 <button
-                  onClick={() => setSelectedProduct({ ...p, isOther: true })}
-                  className="px-3 py-1 bg-blue-500 text-white text-sm rounded-md hover:bg-blue-600 font-semibold shadow-sm"
+                  onClick={() => setShowOtherStock(true)}
+                  className="px-5 py-2 bg-green-500 text-white rounded-full hover:bg-green-600 transition-colors shadow-md"
                 >
-                  Beli
+                  🔄 Cek Stok
                 </button>
               </div>
-            </div>
-          ))}
-        </div>
-      </>
-    )}
 
-    {/* POPUP STOK OTHER PRODUCTS */}
-    {showOtherStock && (
-      <div
-        className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
-        onClick={(e) => {
-          if (e.target === e.currentTarget) setShowOtherStock(false);
-        }}
-      >
-        <div className="bg-gray-800 p-4 sm:p-6 rounded-2xl shadow-2xl w-full max-w-lg relative animate-scaleFade overflow-y-auto max-h-[80vh] text-white">
-          <h2 className="text-xl font-bold mb-3 text-center">📦 Stok Lainnya</h2>
-          {otherProductsState.length === 0 ? (
-            <p className="text-gray-300 text-center">
-              Semua produk sedang <span className="text-red-400 font-semibold">CLOSE</span>.
-              <br /> Silakan tunggu update berikutnya.
-            </p>
-          ) : (
-            <div className="space-y-2">
-              {otherProductsState.map((item, i) => (
-                <div
-                  key={i}
-                  className="flex justify-between items-center bg-gray-700/50 hover:bg-gray-700 rounded-lg px-3 py-2 transition-all"
-                >
-                  <div>
-                    <p className="font-semibold text-sm">{item.nama_produk}</p>
-                    <p className="text-gray-400 text-xs">{item.kode_produk}</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {otherProductsState.map((p, i) => (
+                  <div
+                    key={i}
+                    className="p-3 bg-gray-800 rounded-2xl shadow-md text-white hover:shadow-xl transition-all"
+                  >
+                    <h3 className="font-bold text-base sm:text-lg">
+                      {p.nama_produk} ({p.kode_produk})
+                    </h3>
+                    <p className="text-gray-400 text-xs sm:text-sm">{p.kode_provider}</p>
+                    <p className="text-gray-300 text-sm mt-1 whitespace-pre-line">{p.deskripsi}</p>
+                    <p className="font-bold text-green-400 mt-2">
+                      Rp {Number(p.harga_final).toLocaleString("id-ID")}
+                    </p>
+                    <div className="flex justify-end mt-3">
+                      <button
+                        onClick={() => setSelectedProduct({ ...p, isOther: true })}
+                        className="px-3 py-1 bg-blue-500 text-white text-sm rounded-md hover:bg-blue-600 font-semibold shadow-sm"
+                      >
+                        Beli
+                      </button>
+                    </div>
                   </div>
-                  <span className="text-green-400 font-bold text-sm">
-                    {item.nama_produk.toLowerCase().includes("bundling")
-                      ? "0 unit"
-                      : `${item.stok} unit`}
-                  </span>
+                ))}
+              </div>
+
+              {/* POPUP STOK OTHER PRODUCTS */}
+              {showOtherStock && (
+                <div
+                  className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
+                  onClick={(e) => {
+                    if (e.target === e.currentTarget) setShowOtherStock(false);
+                  }}
+                >
+                  <div className="bg-gray-800 p-4 sm:p-6 rounded-2xl shadow-2xl w-full max-w-lg relative animate-scaleFade overflow-y-auto max-h-[80vh] text-white">
+                    <h2 className="text-xl font-bold mb-3 text-center">📦 Stok Lainnya</h2>
+                    {otherProductsState.length === 0 ? (
+                      <p className="text-gray-300 text-center">Tidak ada data stok.</p>
+                    ) : (
+                      <div className="space-y-2">
+                        {otherProductsState.map((item, i) => (
+                          <div
+                            key={i}
+                            className="flex justify-between items-center bg-gray-700/50 hover:bg-gray-700 rounded-lg px-3 py-2 transition-all"
+                          >
+                            <div>
+                              <p className="font-semibold text-sm">{item.nama_produk}</p>
+                              <p className="text-gray-400 text-xs">{item.kode_produk}</p>
+                            </div>
+                            <span className="text-green-400 font-bold text-sm">
+                              {item.nama_produk.toLowerCase().includes("bundling")
+                                ? "0 unit"
+                                : `${item.stok} unit`}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                    <button
+                      onClick={() => setShowOtherStock(false)}
+                      className="absolute top-2 right-3 text-2xl text-white hover:text-red-500"
+                    >
+                      &times;
+                    </button>
+                  </div>
                 </div>
-              ))}
-            </div>
+              )}
+            </section>
           )}
-          <button
-            onClick={() => setShowOtherStock(false)}
-            className="absolute top-2 right-3 text-2xl text-white hover:text-red-500"
-          >
-            &times;
-          </button>
         </div>
       </div>
-    )}
-  </section>
-)}
-
+ini sudah tidak ada produk nya tolong buat kan tampilan nya semua sedang close silahkan tunggu untuk update produk berikutnya
 
       {/* MODAL */}
       {selectedProduct && (
