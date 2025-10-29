@@ -213,7 +213,7 @@ export default function Page() {
                 </button>
               </div>
               <p className="text-yellow-400 text-xs sm:text-sm text-center mb-3">
-                ⚠️ Restok setiap jam 06:00 pagi
+                ⚠️ Restok setiap hari
               </p>
               {loadingStock ? (
                 <p className="text-white text-center">Memuat stok...</p>
@@ -247,44 +247,50 @@ export default function Page() {
           )}
 
           {/* PRODUCTS */}
-          {activeTab === "products" && (
-            <section>
-              {loadingProducts ? (
-                <p className="text-white text-center">Memuat produk...</p>
-              ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {products.map((p, i) => (
-                    <div
-                      key={i}
-                      className="p-3 sm:p-4 bg-gray-800 rounded-2xl shadow-md hover:shadow-xl transition-all text-white"
-                    >
-                      <h3 className="font-bold text-base sm:text-lg">
-                        {p.nama_produk} ({p.kode_produk})
-                      </h3>
-                      <p className="text-gray-400 text-xs sm:text-sm">{p.kode_provider}</p>
-                      <p className="text-gray-300 text-sm mt-1 whitespace-pre-line">{p.deskripsi}</p>
-                      <p className="font-bold text-green-400 mt-2">
-                        Rp{" "}
-                        {(
-                          p.kode_produk === "BPAL1"
-                            ? Number(p.harga_final) + 3000
-                            : Number(p.harga_final) + 5000
-                        ).toLocaleString("id-ID")}
-                      </p>
-                      <div className="flex justify-end mt-3">
-                        <button
-                          onClick={() => setSelectedProduct({ ...p, isOther: false })}
-                          className="px-3 py-1 bg-blue-500 text-white text-sm rounded-md hover:bg-blue-600 font-semibold shadow-sm"
-                        >
-                          Beli
-                        </button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </section>
-          )}
+{activeTab === "products" && (
+  <section>
+    {loadingProducts ? (
+      <p className="text-white text-center">Memuat produk...</p>
+    ) : (
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        {products.map((p, i) => {
+          let hargaTambahan = 0;
+
+          if (p.kode_produk?.startsWith("XLA")) hargaTambahan = 10000;
+          else if (p.kode_produk?.startsWith("XDA")) hargaTambahan = 7000;
+          else if (p.kode_produk?.startsWith("FMX")) hargaTambahan = 3000;
+
+          const hargaFinal = Number(p.harga_final) + hargaTambahan;
+
+          return (
+            <div
+              key={i}
+              className="p-3 sm:p-4 bg-gray-800 rounded-2xl shadow-md hover:shadow-xl transition-all text-white"
+            >
+              <h3 className="font-bold text-base sm:text-lg">
+                {p.nama_produk} ({p.kode_produk})
+              </h3>
+              <p className="text-gray-400 text-xs sm:text-sm">{p.kode_provider}</p>
+              <p className="text-gray-300 text-sm mt-1 whitespace-pre-line">{p.deskripsi}</p>
+              <p className="font-bold text-green-400 mt-2">
+                Rp {hargaFinal.toLocaleString("id-ID")}
+              </p>
+              <div className="flex justify-end mt-3">
+                <button
+                  onClick={() => setSelectedProduct({ ...p, isOther: false })}
+                  className="px-3 py-1 bg-blue-500 text-white text-sm rounded-md hover:bg-blue-600 font-semibold shadow-sm"
+                >
+                  Beli
+                </button>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    )}
+  </section>
+)}
+
 
           {/* AREA */}
           {activeTab === "area" && (
