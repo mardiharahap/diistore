@@ -254,8 +254,12 @@ export default function Page() {
     ) : (
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {products
-          // 🔹 Filter: hapus produk dengan kode BPAL
-          .filter(p => !p.kode_produk?.startsWith("BPA"))
+          // 🔹 Filter: hapus produk dengan kode BPA & XLB
+          .filter(
+            (p) =>
+              !p.kode_produk?.startsWith("BPA") &&
+              !p.kode_produk?.startsWith("XLB")
+          )
           .map((p, i) => {
             let hargaTambahan = 0;
 
@@ -293,6 +297,7 @@ export default function Page() {
     )}
   </section>
 )}
+
 
 
 
