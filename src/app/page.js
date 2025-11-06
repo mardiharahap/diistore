@@ -202,49 +202,56 @@ export default function Page() {
         <div className="mt-4 overflow-y-auto max-h-[80vh] pr-1 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
           
           {/* STOCK */}
-          {activeTab === "stock" && (
-            <section>
-              <div className="flex justify-center mb-2">
-                <button
-                  onClick={fetchStock}
-                  className="px-5 py-2 bg-green-500 text-white rounded-full hover:bg-green-600 transition-colors shadow-md"
-                >
-                  🔄 Refresh Stock
-                </button>
+         {activeTab === "stock" && (
+  <section>
+    <div className="flex justify-center mb-2">
+      <button
+        onClick={fetchStock}
+        className="px-5 py-2 bg-green-500 text-white rounded-full hover:bg-green-600 transition-colors shadow-md"
+      >
+        🔄 Refresh Stock
+      </button>
+    </div>
+    <p className="text-yellow-400 text-xs sm:text-sm text-center mb-3">
+      ⚠️ Restok setiap hari
+    </p>
+    {loadingStock ? (
+      <p className="text-white text-center">Memuat stok...</p>
+    ) : (
+      <div className="space-y-2">
+        {stock
+          .sort((a, b) => b.sisa_slot - a.sisa_slot)
+          .map((s, i) => (
+            <div
+              key={i}
+              className={`flex justify-between items-center p-2 sm:p-3 rounded-xl ${getBgColor(
+                s.sisa_slot
+              )} hover:scale-[1.02] transition-transform`}
+            >
+              <div>
+                <span className="font-semibold text-white text-sm sm:text-base">{s.type}</span>
+                <div className="text-gray-300 text-xs sm:text-sm">{s.nama}</div>
               </div>
-              <p className="text-yellow-400 text-xs sm:text-sm text-center mb-3">
-                ⚠️ Restok setiap hari
-              </p>
-              {loadingStock ? (
-                <p className="text-white text-center">Memuat stok...</p>
-              ) : (
-                <div className="space-y-2">
-                  {stock
-                    .sort((a, b) => b.sisa_slot - a.sisa_slot)
-                    .map((s, i) => (
-                      <div
-                        key={i}
-                        className={`flex justify-between items-center p-2 sm:p-3 rounded-xl ${getBgColor(
-                          s.sisa_slot
-                        )} hover:scale-[1.02] transition-transform`}
-                      >
-                        <div>
-                          <span className="font-semibold text-white text-sm sm:text-base">{s.type}</span>
-                          <div className="text-gray-300 text-xs sm:text-sm">{s.nama}</div>
-                        </div>
-                        <span
-                          className={`px-3 py-1 text-xs sm:text-sm rounded-full text-white font-semibold ${getBadgeColor(
-                            s.sisa_slot
-                          )}`}
-                        >
-                          {s.sisa_slot} unit
-                        </span>
-                      </div>
-                    ))}
-                </div>
-              )}
-            </section>
-          )}
+              <span
+                className={`px-3 py-1 text-xs sm:text-sm rounded-full text-white font-semibold ${getBadgeColor(
+                  s.sisa_slot
+                )}`}
+              >
+                {s.sisa_slot} unit
+              </span>
+            </div>
+          ))}
+
+        {/* 📌 Pesan tambahan di bawah daftar stok */}
+        <div className="mt-4 text-gray-300 text-xs sm:text-sm bg-gray-800/70 p-3 rounded-xl border border-gray-700 space-y-1">
+          <p>🔹 <span className="font-semibold text-blue-400">FMX</span> → Stok <span className="text-green-400 font-semibold">unlimited</span> dan hanya untuk provider <span className="font-semibold text-yellow-400">XL</span>.</p>
+          <p>🔹 <span className="font-semibold text-blue-400">XDA</span> → Bisa untuk <span className="font-semibold text-yellow-400">XL</span> & <span className="font-semibold text-purple-400">Axis</span>, stok dapat dicek melalui <a href="https://wa.me/6283867191746?text=cek%20stok%20xda" target="_blank" rel="noopener noreferrer" className="text-green-400 underline hover:text-green-500">Bot WhatsApp</a>.</p>
+        </div>
+      </div>
+    )}
+  </section>
+)}
+
 
          {/* PRODUCTS */}
 {activeTab === "products" && (
