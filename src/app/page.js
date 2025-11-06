@@ -245,7 +245,7 @@ export default function Page() {
         {/* 📌 Pesan tambahan di bawah daftar stok */}
         <div className="mt-4 text-gray-300 text-xs sm:text-sm bg-gray-800/70 p-3 rounded-xl border border-gray-700 space-y-1">
           <p>🔹 <span className="font-semibold text-blue-400">FMX</span> → Stok <span className="text-green-400 font-semibold">unlimited</span> dan hanya untuk provider <span className="font-semibold text-yellow-400">XL</span>.</p>
-          <p>🔹 <span className="font-semibold text-blue-400">XDA</span> → Bisa untuk <span className="font-semibold text-yellow-400">XL</span> & <span className="font-semibold text-purple-400">Axis</span>, stok dapat dicek melalui <a href="https://wa.me/6283867191746?text=cek%20stok%20xda" target="_blank" rel="noopener noreferrer" className="text-green-400 underline hover:text-green-500">Bot WhatsApp</a>.</p>
+          <p>🔹 <span className="font-semibold text-blue-400">XDA</span> → Bisa untuk <span className="font-semibold text-yellow-400">XL</span> & <span className="font-semibold text-purple-400">Axis</span>, stok dapat dicek melalui <a href="https://wa.me/6283867191746?text=stok" target="_blank" rel="noopener noreferrer" className="text-green-400 underline hover:text-green-500">Bot WhatsApp</a>.</p>
         </div>
       </div>
     )}
